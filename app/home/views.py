@@ -58,7 +58,7 @@ def welcome():
 def fav():
     if "user" not in session:
         return abort(404)
-    conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='1232123', db='musicdb')
+    conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='145132', db='musicdb')
    
     cursor = conn.cursor()
     sql = "SELECT music_id FROM library WHERE id = '%s' " % session.get("user_id")
@@ -83,7 +83,7 @@ def fav():
 def mybuy():
     if "user" not in session:
         return abort(404)
-    conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='1232123', db='musicdb')
+    conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='145132', db='musicdb')
 
     cursor = conn.cursor()
     sql = "SELECT music_id FROM buy WHERE id = '%s' " % session.get("user_id")
@@ -331,7 +331,7 @@ def wallet():
 def play():
     isbuy = 0
 
-    conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='1232123', db='musicdb')
+    conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='145132', db='musicdb')
     cursor = conn.cursor()
     musicid = int(request.args.get('id'))
     sql = "SELECT free FROM music WHERE music_id = '%s' " % musicid
@@ -432,7 +432,7 @@ def register():
 def like():
     if "user" not in session:
         return abort(404)
-    conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='1232123', db='musicdb')
+    conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='145132', db='musicdb')
     musicd = int(request.args.get('id'))
     # print(musicd)
     user_id = session.get('user_id')
@@ -470,7 +470,7 @@ def del_like():
 # 购买
 @home.route("/buy")
 def buy():
-    conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='1232123', db='musicdb')
+    conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='145132', db='musicdb')
     musicd = int(request.args.get('id'))
     user_id = session.get('user_id')
     cursor = conn.cursor()

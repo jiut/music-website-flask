@@ -9,7 +9,7 @@ app = Flask(__name__)
 # 使用app对象，调用register_blueprint函数进行蓝图的注册
 # app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 # 用于连接数据的数据库。
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:1232123@127.0.0.1:3306/musicdb"
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:newpwd@localhost:3306/musicdb"
 
 app.debug = True
 # Secret_key用于密码加盐与CSRF验证

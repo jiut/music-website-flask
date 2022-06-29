@@ -2,20 +2,21 @@
 import datetime
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-
+import pymysql
 '''
 models文件是有关数据库相关文件
 '''
 
 app = Flask(__name__)
-
 # 用于连接数据的数据库。
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:1232123@127.0.0.1:3306/musicdb"
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:newpwd@localhost/musicdb"
+
+
 # Flask-SQLAlchemy 将会追踪对象的修改并且发送信号。
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-
+pymysql.install_as_MySQLdb()
 
 class User(db.Model):
     __tablename__ = 'user'
