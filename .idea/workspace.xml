@@ -4,8 +4,13 @@
     <bookmark url="file://$PROJECT_DIR$/app/home/views.py" line="7" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca1b01d4-5c24-4bed-ae14-7e63764b61af" name="Default Changelist" comment="">
+    <list default="true" id="ca1b01d4-5c24-4bed-ae14-7e63764b61af" name="Default Changelist" comment="初始化">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/music.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/Sql_p.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/Sql_p.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Sql_p.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -59,6 +64,17 @@
       <find>img</find>
       <find>404</find>
     </findStrings>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -205,7 +221,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Files/source/music-website-flask/manage.py",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
@@ -224,24 +242,6 @@
       <recent name="D:\Sql_p\app\static" />
       <recent name="D:\Sql_p\app\static\base" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration name="Sql_p" type="Python.FlaskServer">
-      <option name="flaskDebug" value="true" />
-      <module name="Sql_p" />
-      <option name="target" value="D:\Sql_p\manage.py" />
-      <option name="targetType" value="PATH" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="D:\Sql_p\Scripts\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <method v="2" />
-    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="项目级" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -297,7 +297,8 @@
       <workItem from="1547907964193" duration="187000" />
       <workItem from="1547908190844" duration="598000" />
       <workItem from="1548848921223" duration="3024000" />
-      <workItem from="1656481548476" duration="277000" />
+      <workItem from="1656481548476" duration="677000" />
+      <workItem from="1656487330125" duration="645000" />
     </task>
     <task id="LOCAL-00001" summary="优化播放与搜索部分">
       <created>1547196172568</created>
@@ -488,7 +489,14 @@
       <option name="project" value="LOCAL" />
       <updated>1547732920146</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="初始化">
+      <created>1656481900481</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1656481900481</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -571,7 +579,11 @@
     <MESSAGE value="完成了" />
     <MESSAGE value="完成了 优化了用户注销 不再物理删除用户" />
     <MESSAGE value="优化了代码格式" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化了代码格式" />
+    <MESSAGE value="初始化" />
+    <option name="LAST_COMMIT_MESSAGE" value="初始化" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/music_website_flask$Sql_p.coverage" NAME="Sql_p 覆盖结果" MODIFIED="1656487936284" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/static/sky/style.css" />

@@ -9,7 +9,7 @@ models文件是有关数据库相关文件
 
 app = Flask(__name__)
 # 用于连接数据的数据库。
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:newpwd@localhost/musicdb"
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:145132@localhost/musicdb"
 
 
 # Flask-SQLAlchemy 将会追踪对象的修改并且发送信号。
