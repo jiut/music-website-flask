@@ -1,6 +1,6 @@
 venv/
 app/static/aplayer/
-app/static/music/
 *.mp3
 Lib/
 *.txt
+/app/static/music/
