@@ -9,8 +9,15 @@
     <link rel="shortcut icon" href="{{ url_for('static',filename='base/images/logo.png') }}">
     <title>微音乐</title>
     <link rel="stylesheet" href="{{ url_for('static',filename='base/css/bootstrap.min.css') }}">
-    {#        <link rel="stylesheet" href="{{ url_for('static',filename='base/css/bootstrap-movie.css') }}">#}
+    {#
+        <link rel="stylesheet" href="{{ url_for('static',filename='base/css/bootstrap-movie.css') }}">
+        #}
     <link rel="stylesheet" href="{{ url_for('static',filename='base/css/animate.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='base/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='aplayer/dist/APlayer.min.css') }}"></link>
+
+
+
     <img src="{{ url_for('static',filename='base/images/logo.png') }}" style="height:30px;" alt="logo">
 
     <script src="{{ url_for('static',filename='base/js/jquery.min.js') }}"></script>
@@ -18,6 +25,10 @@
     <script src="{{ url_for('static',filename='base/js/jquery.singlePageNav.min.js') }}"></script>
     <script src="{{ url_for('static',filename='base/js/wow.min.js') }}"></script>
     <script src="{{ url_for('static',filename='lazyload/jquery.lazyload.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='aplayer/dist/APlayer.min.js') }}"></script>
+
+    <link rel="icon" href="{{ url_for('static', filename='static/image/document.ico') }}">
+
 
     <style>
         .navbar-brand > img {
@@ -35,6 +46,9 @@
 </head>
 
 <body>
+
+<div id="aplayer"></div>
+
 <script src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
 <!--导航-->
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -125,7 +139,7 @@
                 <p>
                     <br>
                 <hr>
-                微音乐-音乐库&nbsp;基于Flask与MySQL数据库
+                　　
                 </p>
             </div>
         </div>
@@ -141,19 +155,58 @@
 
 </script>
 <script>
+
+    var searchCount = 0;
+
     $(document).ready(function () {
+        const ap = new APlayer({
+            container: document.getElementById('aplayer'),
+            fixed: true,
+            listFolded: true,
+            lrcType: 1
+        });
+
+        $("#aplayer").removeClass("aplayer-narrow");
+
         $("img.lazy").lazyload({
             effect: "fadeIn"
         });
+
+        let music = [];
+
         $("#do_search").click(function () {
-            var key = $("#key_music").val();
-            location.href = "{{ url_for('home.search')}}?key=" + key
+            let keyword = $("#key_music").val();
+            let query = $.get("{{ url_for('home.musicSearch') }}" + "/?key=" + keyword, function (data) {
+                music = data["result"];
+            });
+            $.when(query).done(function () {
+
+                for (let i = 0; i < music.length; i++) {
+                    let musicItem = music[i];
+                    ap.list.add({
+                            name: musicItem["name"],
+                            url: "/queryurl/" + musicItem["id"],
+                            artist: musicItem["ar"],
+                            cover: musicItem["alPic"],
+                            lrc: musicItem["lrc"]
+                        }
+                    );
+                }
+
+                ap.list.switch(searchCount * 30);
+                ap.play();
+                searchCount++;
+
+            });
         });
+
         $("#do_search").keydown(function () {
-            var key = $("#key_music").val();
-            location.href = "{{ url_for('home.search')}}?key=" + key
+            $("#do_search").click();
         });
     });
+
+
+
 </script>
 </body>
 </html>

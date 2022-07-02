@@ -51,10 +51,20 @@
                                     {% endfor %}
                                     {#                                <input id="input_password" class="form-control input-lg" placeholder="密码" name="password" type="password" value="">#}
                                 </div>
+                            <div class="col-md-12" id="error_password"></div>
+                                <form method="post">
+
+    验证码<br>
+    <!-- 密码输入框的 type 属性使用 password，会将输入值显示为圆点 -->
+    <input type="password" name="password" ><br><br>
+     <button id="btn-validate">获取验证码</button>
+
+</form>
+                            <a href = "../admin">管理员登录</a>
                                 <div class="col-md-12" id="error_password"></div>
                                 {{ form.csrf_token }}
                                 {{ form.submit }}
-                                {#                            <a href="{{ url_for('home.user') }}" class="btn btn-lg btn-success btn-block">登录</a>#}
+                                {#                            <a href="{{ url_for('home.user') }}" class="btn btn-lg btn-success btn-block" >登录</a>#}
                             </fieldset>
                         </form>
                     </div>
@@ -63,4 +73,12 @@
         </div>
     </div>
     <!--内容-->
+    <script>
+    $(document).ready(function () {
+        $("#btn-validate").click(function () {
+            $.get("{{url_for("home.login")}}/") ;
+            alert("已发送验证码至绑定手机号")
+        });
+    });
+    </script>
 {% endblock %}

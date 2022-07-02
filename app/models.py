@@ -37,6 +37,9 @@ class User(db.Model):
 
     def get_vclass(self):
         return self.vclass
+
+    def get_phone(self):
+        return self.phone
     # user = db.relationship('Library')
     # def __repr__(self):
     #     return '<User %r>' % self.name

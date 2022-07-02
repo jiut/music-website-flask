@@ -1,21 +1,32 @@
-from flask import render_template, redirect, flash, url_for, session, request, abort
-from werkzeug.security import generate_password_hash
-from . import home
-from app.home.forms import LoginForm, RegisterForm, UserdetailForm, PwdForm, WalletForm
-from app.models import User, Music, Board, Buy, db, Library
+import datetime
+
 # from app import db, app, rd
 import pymysql
-import datetime
+import requests
+from flask import render_template, redirect, flash, url_for, session, abort, request
+from werkzeug.security import generate_password_hash
+
+from app.home.forms import LoginForm, RegisterForm, UserdetailForm, PwdForm, WalletForm
+from app.models import User, Music, Board, Buy, db, Library
+from . import home
 
 '''
 views是主要的路由文件
 '''
+
+flag = 1
 
 
 # pymysql的数据库连接
 # conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='1232123', db='musicdb')
 
 # @ home = Blueprint("home",__name__)
+
+
+# 根路由
+@home.route("/test001")
+def test001():
+    return render_template("test01.html")
 
 
 # 根路由
@@ -58,8 +69,8 @@ def welcome():
 def fav():
     if "user" not in session:
         return abort(404)
-    conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='145132', db='musicdb')
-   
+    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='145132', db='musicdb')
+
     cursor = conn.cursor()
     sql = "SELECT music_id FROM library WHERE id = '%s' " % session.get("user_id")
     cursor.execute(sql)
@@ -83,7 +94,7 @@ def fav():
 def mybuy():
     if "user" not in session:
         return abort(404)
-    conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='145132', db='musicdb')
+    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='145132', db='musicdb')
 
     cursor = conn.cursor()
     sql = "SELECT music_id FROM buy WHERE id = '%s' " % session.get("user_id")
@@ -154,13 +165,21 @@ def folk():
     return render_template("home/folk.html", name=session.get('user'), page_data=page_data)
 
 
+url = 'http://localhost:3000'
+
+
 # 登录
 @home.route("/login/", methods=["GET", "POST"])
 def login():
     form = LoginForm()
+    # 验证码登录
     if form.validate_on_submit():
         data = form.data
         user = User.query.filter_by(name=data["name"]).first()
+        phone = user.get_phone()
+        print(phone)
+        requests.get(url + "/captcha/sent?phone=" + str(phone))
+
         if user:
             if not user.check_pwd(data["pwd"]):  # 密码采用pbkdf2:sha256方式加密-所以要用这种方案判断密码
                 flash("密码错误！", "err")
@@ -331,7 +350,7 @@ def wallet():
 def play():
     isbuy = 0
 
-    conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='145132', db='musicdb')
+    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='145132', db='musicdb')
     cursor = conn.cursor()
     musicid = int(request.args.get('id'))
     sql = "SELECT free FROM music WHERE music_id = '%s' " % musicid
@@ -352,7 +371,6 @@ def play():
         return redirect(url_for('home.login'))
 
     vclass = session.get('vclass')
-
 
     if vclass == 0:
         id = session.get('user_id')
@@ -432,7 +450,7 @@ def register():
 def like():
     if "user" not in session:
         return abort(404)
-    conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='145132', db='musicdb')
+    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='145132', db='musicdb')
     musicd = int(request.args.get('id'))
     # print(musicd)
     user_id = session.get('user_id')
@@ -470,7 +488,7 @@ def del_like():
 # 购买
 @home.route("/buy")
 def buy():
-    conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='145132', db='musicdb')
+    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='145132', db='musicdb')
     musicd = int(request.args.get('id'))
     user_id = session.get('user_id')
     cursor = conn.cursor()
@@ -534,7 +552,99 @@ def search():
         Music.listen.desc()
     )
 
-
     page_data.key = key
 
     return render_template("home/search.html", name=session.get('user'), key=key, count=count, page_data=page_data)
+
+
+
+@home.route('/musictest/', methods=["GET"])
+def musicSearch():
+    f_search = open('./SearchCache.txt', 'r+', encoding="utf-8")
+    search_cache = eval(f_search.readline())
+    f_value = open('./ValueCache.txt', 'r+', encoding="utf-8")
+    value_cache = eval(f_value.readline())
+
+    is_value_change = 0
+
+    key = request.args.get('key')
+
+    if key in search_cache:
+        search = search_cache[key]
+    else:
+        search = requests.get(url + "/cloudsearch?keywords=" + key).json()
+        search_cache[key] = search
+        f_search.seek(0)  # 得把指针移动到开头再truncate才行，要不然会出现NUL
+        f_search.truncate(0)
+        write_line = str(search_cache)
+        f_search.write(write_line)
+
+    f_search.close()
+
+    songs = search['result']['songs']
+    music_list = {"result": []}
+    for song in songs:
+        name = song["name"]
+        id = song["id"]
+
+        if (id in value_cache) and ("lrc" in value_cache[id]):
+            lrc = value_cache[id]["lrc"]
+        else:
+            lrc = requests.get(url + "/lyric?id=" + str(id)).json()
+            lrc = lrc["lrc"]["lyric"]
+            if (id in value_cache):
+                value_cache[id].update({"lrc": lrc})
+            else:
+                value_cache[id] = {"lrc": lrc}
+            is_value_change = is_value_change + 1
+
+        ar = song["ar"]
+        al = song["al"]
+
+        artist_list = ''
+        for artist in ar:
+            artist_list = artist_list + artist['name'] + '/'
+
+        artist_list = artist_list[:-1]
+        dict = {"id": id, "name": name, "ar": artist_list, "alPic": al['picUrl'] + "?param=130y130", "lrc": lrc}
+
+        music_list["result"].append(dict)
+
+    if is_value_change > 0:
+        f_value.seek(0)
+        f_value.truncate(0)
+        write_line = str(value_cache)
+        f_value.write(write_line)
+    f_value.close()
+    return music_list
+
+
+@home.route("/queryurl/<id>")  # 链接
+def queryurl(id):
+    f_link = open('./LinkCache.txt', 'r+', encoding="utf-8")
+    link_cache = eval(f_link.readline())
+
+    if id in link_cache:
+        link = url_for("static", filename="music/" + id + '.mp3')
+    else:
+        link = requests.get(url + "/song/url?id=" + id).json()
+        if "data" in link:
+            link = link['data'][0]['url']
+        else:
+            return "/"
+
+        temp_link = url_for('static', filename='music/' + id + ".mp3")
+        req = requests.get(link)
+        with open("." + temp_link, "wb") as f:
+            f.write(req.content)
+
+        link = temp_link
+
+        link_cache.add(id)
+        f_link.seek(0)
+        f_link.truncate(0)
+        f_link.write(str(link_cache))
+
+    f_link.close()
+
+    return redirect(link)

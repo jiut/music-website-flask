@@ -118,6 +118,7 @@ class LoginForm(FlaskForm):
             "placeholder": "请输入密码",
         }
     )
+
     submit = SubmitField(
         '登录',
         render_kw={

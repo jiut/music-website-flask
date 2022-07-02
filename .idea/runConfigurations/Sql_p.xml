@@ -1,7 +1,8 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Sql_p" type="Python.FlaskServer" singleton="false">
+    <option name="additionalOptions" value="--port=5005" />
     <option name="flaskDebug" value="true" />
-    <module name="music" />
+    <module name="untitled2" />
     <option name="target" value="D:\Files\source\music-website-flask\manage.py" />
     <option name="targetType" value="PATH" />
     <option name="INTERPRETER_OPTIONS" value="" />
