@@ -1,33 +1,27 @@
-import datetime
+import requests
+from flask import render_template, redirect, flash, url_for, session, abort ,request
+from werkzeug.security import generate_password_hash
+from . import home
+from app.home.forms import LoginForm, RegisterForm, UserdetailForm, PwdForm, WalletForm
+from app.models import User, Music, Board, Buy, db, Library
 
 # from app import db, app, rd
 import pymysql
-import requests
-from flask import render_template, redirect, flash, url_for, session, abort, request
-from werkzeug.security import generate_password_hash
-
-from app.home.forms import LoginForm, RegisterForm, UserdetailForm, PwdForm, WalletForm
-from app.models import User, Music, Board, Buy, db, Library
-from . import home
-
+import datetime
 '''
 views是主要的路由文件
 '''
 
 flag = 1
-
-
 # pymysql的数据库连接
 # conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='1232123', db='musicdb')
 
 # @ home = Blueprint("home",__name__)
 
-
 # 根路由
 @home.route("/test001")
 def test001():
     return render_template("test01.html")
-
 
 # 根路由
 @home.route("/")
@@ -166,7 +160,7 @@ def folk():
 
 
 url = 'http://localhost:3000'
-
+phone = 11111111111
 
 # 登录
 @home.route("/login/", methods=["GET", "POST"])
@@ -176,10 +170,11 @@ def login():
     if form.validate_on_submit():
         data = form.data
         user = User.query.filter_by(name=data["name"]).first()
+        global phone
+        print(phone)
         phone = user.get_phone()
         print(phone)
-        requests.get(url + "/captcha/sent?phone=" + str(phone))
-
+        # requests.get(url + "/captcha/sent?phone=" + str(phone))
         if user:
             if not user.check_pwd(data["pwd"]):  # 密码采用pbkdf2:sha256方式加密-所以要用这种方案判断密码
                 flash("密码错误！", "err")
@@ -196,9 +191,30 @@ def login():
         session["user"] = user.name
         session["user_id"] = user.id
         session["vclass"] = vclass
-
-        return redirect(url_for("home.welcome"))
+        return render_template("home/phonelogin.html", phone=str(phone)) #redirect(url_for("home.phonelogin"))
     return render_template("home/login.html", form=form)
+
+
+
+@home.route('/phonelogin/', methods=["GET", "POST"])
+def phonelogin():
+    if request.method == 'POST':
+        if 'submit' in request.form:
+            global phone
+            print("p="+phone)
+            username = str(phone)
+            password = request.form['password']
+            print("p=" + password)
+            requests.get(url + "/login/cellphone?phone=" + username + "&captcha=" + password)
+            num = requests.get(url + "/captcha/verify?phone=" + username + "&captcha=" + password).status_code
+            print(num)
+            if num != 200:
+                flash("验证码错误","err")
+                return redirect(url_for("home.phonelogin"))
+
+        return redirect("../welcome")
+    return render_template("home/phonelogin.html")
+
 
 
 # 退出登录
@@ -207,6 +223,8 @@ def logout():
     session.pop("user", None)
     session.pop("user_id", None)
     session.pop("vclass", None)
+
+    requests.get(url + "/logout")
     return redirect(url_for('home.login'))
 
 

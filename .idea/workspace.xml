@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="989c8214-9567-4c55-bbd1-d2d978e22d9d" name="Default Changelist" comment="播放器完成">
-      <change afterPath="$PROJECT_DIR$/app/templates/home/phonelogin.html" afterDir="false" />
+    <list default="true" id="989c8214-9567-4c55-bbd1-d2d978e22d9d" name="Default Changelist" comment="合并前修改">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/home/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/home/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/home/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/home/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/home/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/home/phonelogin.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home/phonelogin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/home/pwd.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home/pwd.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +124,17 @@
       <workItem from="1656740533508" duration="276000" />
       <workItem from="1656740968761" duration="4143000" />
       <workItem from="1656746681072" duration="97000" />
+      <workItem from="1656761248258" duration="15000" />
+      <workItem from="1656810641918" duration="316000" />
     </task>
+    <task id="LOCAL-00001" summary="合并前修改">
+      <created>1656754824406</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1656754824406</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -137,19 +151,23 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="合并前修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="合并前修改" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/app/home/views.py</url>
-          <line>279</line>
+          <line>297</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/music_website_flask$Sql_p.coverage" NAME="Sql_p 覆盖结果" MODIFIED="1656754547184" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/music_website_flask$Sql_p.coverage" NAME="Sql_p 覆盖结果" MODIFIED="1656810844087" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/untitled2$untitled2.coverage" NAME="untitled2 覆盖结果" MODIFIED="1656741867049" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

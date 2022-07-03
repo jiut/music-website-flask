@@ -9,13 +9,10 @@
     <link rel="shortcut icon" href="{{ url_for('static',filename='base/images/logo.png') }}">
     <title>微音乐</title>
     <link rel="stylesheet" href="{{ url_for('static',filename='base/css/bootstrap.min.css') }}">
-    {#
-        <link rel="stylesheet" href="{{ url_for('static',filename='base/css/bootstrap-movie.css') }}">
-        #}
+    {#        <link rel="stylesheet" href="{{ url_for('static',filename='base/css/bootstrap-movie.css') }}">#}
     <link rel="stylesheet" href="{{ url_for('static',filename='base/css/animate.css') }}">
     <link rel="stylesheet" href="{{ url_for('static',filename='base/css/custom.css') }}">
     <link rel="stylesheet" href="{{ url_for('static',filename='aplayer/dist/APlayer.min.css') }}"></link>
-
 
 
     <img src="{{ url_for('static',filename='base/images/logo.png') }}" style="height:30px;" alt="logo">
@@ -26,6 +23,8 @@
     <script src="{{ url_for('static',filename='base/js/wow.min.js') }}"></script>
     <script src="{{ url_for('static',filename='lazyload/jquery.lazyload.min.js') }}"></script>
     <script src="{{ url_for('static',filename='aplayer/dist/APlayer.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='base/js/color-thief.umd.js') }}"></script>
+
 
     <link rel="icon" href="{{ url_for('static', filename='static/image/document.ico') }}">
 
@@ -60,7 +59,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="{{ url_for('home.index') }}" class="navbar-brand" style="width:250px;">
+            <a href="{{ url_for('home.welcome') }}" class="navbar-brand" style="width:250px;">
                 &nbsp;微音乐
             </a>
         </div>
@@ -166,6 +165,38 @@
             lrcType: 1
         });
 
+        const colorThief = new ColorThief();
+        const image = new Image();
+        const xhr = new XMLHttpRequest();
+
+        var color = "rgb(183, 218, 255)";
+
+        const setTheme = (index) => {
+            if (typeof (index) === "object") {
+                index = index['index'];
+            }
+            if (!(ap.list.audios[index].theme)) {
+                xhr.onload = function () {
+                    let coverUrl = URL.createObjectURL(this.response);
+                    image.onload = function () {
+                        color = colorThief.getColor(image);
+                        colorset = colorThief.getPalette(image);
+                        colorset.unshift(color)
+
+                        color = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+                        ap.theme(color, index);
+                        URL.revokeObjectURL(coverUrl);
+                    };
+                    image.src = coverUrl;
+                }
+                xhr.open('GET', ap.list.audios[index].cover, true);
+                xhr.responseType = 'blob';
+                xhr.send();
+            } else {
+                color = ap.list.audios[index].theme;
+            }
+        };
+
         $("#aplayer").removeClass("aplayer-narrow");
 
         $("img.lazy").lazyload({
@@ -197,6 +228,11 @@
                 ap.play();
                 searchCount++;
 
+                setTheme(ap.list.index);
+                ap.on('listswitch', (index) => {
+                    setTheme(index);
+                });
+
             });
         });
 
@@ -204,9 +240,6 @@
             $("#do_search").click();
         });
     });
-
-
-
 </script>
 </body>
 </html>

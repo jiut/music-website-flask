@@ -38,7 +38,7 @@ class RegisterForm(FlaskForm):
         label="手机",
         validators=[
             DataRequired("手机号不能为空！"),
-            Regexp("1[3458]\\d{9}", message="手机格式不正确！")
+            Regexp("1[34578]\\d{9}", message="手机格式不正确！")
         ],
         description="手机",
         render_kw={
@@ -155,7 +155,7 @@ class UserdetailForm(FlaskForm):
         label="手机",
         validators=[
             DataRequired("手机号不能为空！"),
-            Regexp("1[3458]\\d{9}", message="手机格式不正确！")
+            Regexp("1[34578]\\d{9}", message="手机格式不正确！")
         ],
         description="手机",
         render_kw={
