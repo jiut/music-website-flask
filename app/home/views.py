@@ -549,31 +549,68 @@ def buy():
 
 
 # 搜索
-@home.route("/search")
+@home.route("/search", methods=["GET"])
 def search():
+    is_value_change = 0
+
     key = request.args.get('key')
-    # kee为防止SQL注入设置的过滤用字符串
-    kee = key.replace('%', '`')
-    if kee != key:
-        key = ""
 
     if key == "":
         return redirect(url_for('home.welcome'))
 
-    count = Music.query.filter(
-        Music.music_name.ilike('%' + key + '%')
-    ).count()
+    f_search = open('./SearchCache.txt', 'r+', encoding="utf-8")
+    search_cache = eval(f_search.readline())
+    f_value = open('./ValueCache.txt', 'r+', encoding="utf-8")
+    value_cache = eval(f_value.readline())
 
-    page_data = Music.query.filter(
-        Music.music_name.ilike('%' + key + '%')
-    ).order_by(
-        Music.listen.desc()
-    )
+    if key in search_cache:
+        search = search_cache[key]
+    else:
+        search = requests.get(url + "/cloudsearch?keywords=" + key).json()
+        search_cache[key] = search
+        f_search.seek(0)  # 得把指针移动到开头再truncate才行，要不然会出现NUL
+        f_search.truncate(0)
+        write_line = str(search_cache)
+        f_search.write(write_line)
 
-    page_data.key = key
+    f_search.close()
 
-    return render_template("home/search.html", name=session.get('user'), key=key, count=count, page_data=page_data)
+    songs = search['result']['songs']
+    music_list = {"result": []}
+    for song in songs:
+        name = song["name"]
+        id = song["id"]
 
+        if (id in value_cache) and ("lrc" in value_cache[id]):
+            lrc = value_cache[id]["lrc"]
+        else:
+            lrc = requests.get(url + "/lyric?id=" + str(id)).json()
+            lrc = lrc["lrc"]["lyric"]
+            if (id in value_cache):
+                value_cache[id].update({"lrc": lrc})
+            else:
+                value_cache[id] = {"lrc": lrc}
+            is_value_change = is_value_change + 1
+
+        ar = song["ar"]
+        al = song["al"]
+
+        artist_list = ''
+        for artist in ar:
+            artist_list = artist_list + artist['name'] + '/'
+
+        artist_list = artist_list[:-1]
+        dict = {"id": id, "name": name, "ar": artist_list, "alPic": al['picUrl'] + "?param=130y130", "lrc": lrc, "al": al['name']}
+
+        music_list["result"].append(dict)
+
+    if is_value_change > 0:
+        f_value.seek(0)
+        f_value.truncate(0)
+        write_line = str(value_cache)
+        f_value.write(write_line)
+    f_value.close()
+    return render_template("home/search.html", music_list=music_list)
 
 
 @home.route('/musictest/', methods=["GET"])
@@ -653,7 +690,7 @@ def queryurl(id):
 
         temp_link = url_for('static', filename='music/' + id + ".mp3")
         req = requests.get(link, timeout=None)
-        with open("." + temp_link, "wb") as f:
+        with open("./app" + temp_link, "wb") as f:
             f.write(req.content)
 
         link = temp_link

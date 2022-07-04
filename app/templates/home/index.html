@@ -1,46 +1,635 @@
 {% extends "home/home.html" %}
 
 {% block content %}
-    <h1>欢迎进入微音乐™音乐库</h1>
-    <br>
-    <div style="margin-top: 10px">
-        <h3>热歌排行榜</h3>
-        <hr>
-        <section id="movielist">
-            <div class="container">
-                <div class="row wow fadeIn" data-wow-delay="0.6s">
-                    {% for v in page_data %}
-                        <div class="col-md-3">
-                            <div class="movielist text-center">
-                                <!--<img data-original="holder.js/262x262"
-                                         class="img-responsive lazy center-block" alt="">-->
-                                {#                    <img src="holder.js/262x166" class="img-responsive center-block" alt="">#}
-                                <div class="text-left"
-                                     style="margin-left:auto;margin-right:auto;width: 200px;margin-bottom: 15px;margin-top:15px">
-                                    <h4>
-                                        <span style="color: rgba(30,30,30,0.99);font-style: italic;">
-                                        {{ loop.index }} . {{ v.music_name }}
-                                    </span>
-                                    </h4>&nbsp;{{ v.author }}
-                                </div>
-                                <div class="btn-group">
-                                    <a href="{{ url_for('home.play',id=v.music_id) }}" class="btn btn-success"
-                                   style="height:30px"
-                                   role="button"><span class="glyphicon glyphicon-play" style=""></span>&nbsp;播放</a>
-                                <a href="{{ url_for('home.login') }}" class="btn btn-default btn-sm "
-                                   style="height:30px"
-                                   role="button"><span class="glyphicon glyphicon-star"></span>&nbsp;收藏</a>
-                                <a href="{{ url_for('home.login') }}" class="btn btn-default btn-sm"
-                                   style="height:30px"
-                                   role="button"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;购买</a>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-label="Slide 1" aria-current="true"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"
+                    class=""></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"
+                    class=""></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-interval="2000">
+                <img src="{{ url_for("static", filename="base/images/1.jpg") }}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item" data-interval="2000">
+                <img src="{{ url_for("static", filename="base/images/2.jpg") }}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item" data-interval="2000">
+                <img src="{{ url_for("static", filename="base/images/3.jpg") }}" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <ul class="nav nav-tabs nav-justified">
+        <li class="nav-item">
+            <a class="nav-link active" data-bs-toggle="tab" href="#huayu">华语</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#oumei">欧美</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#riyu">日语</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#hanyu">韩语</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#yueyu">粤语</a>
+        </li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade active show" id="huayu">
+            <div class="d-flex justify-content-between flex-wrap">
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
                 </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="tab-pane fade" id="oumei">
+            <div class="d-flex justify-content-between flex-wrap">
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+
             </div>
 
-        </section>
+        </div>
+        <div class="tab-pane fade" id="riyu">
+            <div class="d-flex justify-content-between flex-wrap">
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="tab-pane fade" id="hanyu">
+            <div class="d-flex justify-content-between flex-wrap">
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="tab-pane fade" id="yueyu">
+            <div class="d-flex justify-content-between flex-wrap">
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top"
+                         src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg" alt="Card image"
+                         style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">闪耀的群星</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
+    <h1>排行榜</h1>
+    <div class="d-flex justify-content-between flex-wrap">
+        <div class="card top-list">
+            <div class="top-list-top">
+                <div class="top-list-bg"><img class="top-list-bg-image"
+                                              src="{{ url_for("static", filename="base/images/top1.png") }}" alt="">
+                </div>
+                <img class="card-img-top" src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg"
+                     alt="Card image">
+            </div>
+            <div class="card-body">
+                <li class="top-list-item">
+                    <div class="top-img top1"></div>
+                    <div class="info"><p title="孤勇者" class="song-name">孤勇者</p>
+                        <p title="陈奕迅" class="top-list-artist">陈奕迅</p></div>
+                </li>
+                <li class="top-list-item lower">
+                    <div class="top-img top2"></div>
+                    <div class="info"><p title="孤勇者" class="song-name">孤勇者</p>
+                        <p title="陈奕迅" class="top-list-artist">陈奕迅</p></div>
+                </li>
+                <li class="top-list-item lower">
+                    <div class="top-img top3"></div>
+                    <div class="info"><p title="孤勇者" class="song-name">孤勇者</p>
+                        <p title="陈奕迅" class="top-list-artist">陈奕迅</p></div>
+                </li>
+                <li class="top-list-item lower">
+                    <div class="index">4</div>
+                    <div class="info"><p title="孤勇者" class="song-name">孤勇者</p>
+                        <p title="陈奕迅" class="top-list-artist">陈奕迅</p></div>
+                </li>
+                <li class="top-list-item lower">
+                    <div class="index">5</div>
+                    <div class="info"><p title="孤勇者" class="song-name">孤勇者</p>
+                        <p title="陈奕迅" class="top-list-artist">陈奕迅</p></div>
+                </li>
+            </div>
+        </div>
+        <div class="card top-list">
+            <div class="top-list-top">
+                <div class="top-list-bg"><img class="top-list-bg-image"
+                                              src="{{ url_for("static", filename="base/images/top2.png") }}" alt="">
+                </div>
+                <img class="card-img-top" src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg"
+                     alt="Card image">
+            </div>
+            <div class="card-body">
+                <li class="top-list-item">
+                    <div class="top-img top1"></div>
+                    <div class="info"><p title="孤勇者" class="song-name">孤勇者</p>
+                        <p title="陈奕迅" class="top-list-artist">陈奕迅</p></div>
+                </li>
+                <li class="top-list-item lower">
+                    <div class="top-img top2"></div>
+                    <div class="info"><p title="孤勇者" class="song-name">孤勇者</p>
+                        <p title="陈奕迅" class="top-list-artist">陈奕迅</p></div>
+                </li>
+                <li class="top-list-item lower">
+                    <div class="top-img top3"></div>
+                    <div class="info"><p title="孤勇者" class="song-name">孤勇者</p>
+                        <p title="陈奕迅" class="top-list-artist">陈奕迅</p></div>
+                </li>
+                <li class="top-list-item lower">
+                    <div class="index">4</div>
+                    <div class="info"><p title="孤勇者" class="song-name">孤勇者</p>
+                        <p title="陈奕迅" class="top-list-artist">陈奕迅</p></div>
+                </li>
+                <li class="top-list-item lower">
+                    <div class="index">5</div>
+                    <div class="info"><p title="孤勇者" class="song-name">孤勇者</p>
+                        <p title="陈奕迅" class="top-list-artist">陈奕迅</p></div>
+                </li>
+            </div>
+        </div>
+        <div class="card top-list">
+            <div class="top-list-top">
+                <div class="top-list-bg"><img class="top-list-bg-image"
+                                              src="{{ url_for("static", filename="base/images/top3.png") }}" alt="">
+                </div>
+                <img class="card-img-top" src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg"
+                     alt="Card image">
+            </div>
+            <div class="card-body">
+                <li class="top-list-item">
+                    <div class="top-img top1"></div>
+                    <div class="info"><p title="孤勇者" class="song-name">孤勇者</p>
+                        <p title="陈奕迅" class="top-list-artist">陈奕迅</p></div>
+                </li>
+                <li class="top-list-item lower">
+                    <div class="top-img top2"></div>
+                    <div class="info"><p title="孤勇者" class="song-name">孤勇者</p>
+                        <p title="陈奕迅" class="top-list-artist">陈奕迅</p></div>
+                </li>
+                <li class="top-list-item lower">
+                    <div class="top-img top3"></div>
+                    <div class="info"><p title="孤勇者" class="song-name">孤勇者</p>
+                        <p title="陈奕迅" class="top-list-artist">陈奕迅</p></div>
+                </li>
+                <li class="top-list-item lower">
+                    <div class="index">4</div>
+                    <div class="info"><p title="孤勇者" class="song-name">孤勇者</p>
+                        <p title="陈奕迅" class="top-list-artist">陈奕迅</p></div>
+                </li>
+                <li class="top-list-item lower">
+                    <div class="index">5</div>
+                    <div class="info"><p title="孤勇者" class="song-name">孤勇者</p>
+                        <p title="陈奕迅" class="top-list-artist">陈奕迅</p></div>
+                </li>
+            </div>
+        </div>
+        <div class="card top-list">
+            <div class="top-list-top">
+                <div class="top-list-bg"><img class="top-list-bg-image"
+                                              src="{{ url_for("static", filename="base/images/top4.png") }}" alt="">
+                </div>
+                <img class="card-img-top" src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg"
+                     alt="Card image">
+            </div>
+            <div class="card-body">
+                <li class="top-list-item">
+                    <div class="top-img top1"></div>
+                    <div class="info"><p title="孤勇者" class="song-name">孤勇者</p>
+                        <p title="陈奕迅" class="top-list-artist">陈奕迅</p></div>
+                </li>
+                <li class="top-list-item lower">
+                    <div class="top-img top2"></div>
+                    <div class="info"><p title="孤勇者" class="song-name">孤勇者</p>
+                        <p title="陈奕迅" class="top-list-artist">陈奕迅</p></div>
+                </li>
+                <li class="top-list-item lower">
+                    <div class="top-img top3"></div>
+                    <div class="info"><p title="孤勇者" class="song-name">孤勇者</p>
+                        <p title="陈奕迅" class="top-list-artist">陈奕迅</p></div>
+                </li>
+                <li class="top-list-item lower">
+                    <div class="index">4</div>
+                    <div class="info"><p title="孤勇者" class="song-name">孤勇者</p>
+                        <p title="陈奕迅" class="top-list-artist">陈奕迅</p></div>
+                </li>
+                <li class="top-list-item lower">
+                    <div class="index">5</div>
+                    <div class="info"><p title="孤勇者" class="song-name">孤勇者</p>
+                        <p title="陈奕迅" class="top-list-artist">陈奕迅</p></div>
+                </li>
+            </div>
+        </div>
+    </div>
+    <h1>歌手推荐</h1>
+    <div style="display: flex; justify-content: space-between; padding: 0 40px;">
+        <div class="artist_item">
+            <div class="pic_artist">
+                <div class="pic_out">
+                    <img alt="" class="pic"
+                         src="{{ url_for("static", filename="base/images/zyboy.jpg") }}"
+                         lazy="loaded"></div>
+                <p class="pic_name flex_c">
+                    <span title="Zyboy忠宇" class="pic_text">Zyboy忠宇</span></p>
+                <p class="pic_num">
+                    58首歌曲
+                </p></div>
+        </div>
+        <div class="artist_item">
+            <div class="pic_artist">
+                <div class="pic_out">
+                    <img alt="" class="pic"
+                         src="{{ url_for("static", filename="base/images/周杰伦.jpg") }}"
+                         lazy="loaded"></div>
+                <p class="pic_name flex_c">
+                    <span title="周杰伦" class="pic_text">周杰伦</span></p>
+                <p class="pic_num">
+                    1694首歌曲
+                </p></div>
+        </div>
+        <div class="artist_item">
+            <div class="pic_artist">
+                <div class="pic_out">
+                    <img alt="" class="pic"
+                         src="{{ url_for("static", filename="base/images/张杰.jpg") }}"
+                         lazy="loaded"></div>
+                <p class="pic_name flex_c">
+                    <span title="张杰" class="pic_text">张杰</span></p>
+                <p class="pic_num">
+                    1164首歌曲
+                </p></div>
+        </div>
+        <div class="artist_item">
+            <div class="pic_artist">
+                <div class="pic_out">
+                    <img alt="" class="pic"
+                         src="{{ url_for("static", filename="base/images/陈奕迅.jpg") }}"
+                         lazy="loaded"></div>
+                <p class="pic_name flex_c">
+                    <span title="陈奕迅" class="pic_text">陈奕迅</span></p>
+                <p class="pic_num">
+                    2929首歌曲
+                </p></div>
+        </div>
+        <div class="artist_item">
+            <div class="pic_artist">
+                <div class="pic_out">
+                    <img alt="" class="pic"
+                         src="{{ url_for("static", filename="base/images/周深.jpg") }}"
+                         lazy="loaded"></div>
+                <p class="pic_name flex_c">
+                    <span title="周深" class="pic_text">周深</span></p>
+                <p class="pic_num">
+                    58首歌曲
+                </p></div>
+        </div>
+            <div class="artist_item">
+            <div class="pic_artist">
+                <div class="pic_out">
+                    <img alt="" class="pic"
+                         src="{{ url_for("static", filename="base/images/林俊杰.jpg") }}"
+                         lazy="loaded"></div>
+                <p class="pic_name flex_c">
+                    <span title="林俊杰" class="pic_text">林俊杰</span></p>
+                <p class="pic_num">
+                    1080首歌曲
+                </p></div>
+        </div>
+
+    </div>
+    <script>
+        if (typeof ap === 'undefined') {
+            const ap = new APlayer({
+                container: document.getElementById('aplayer'),
+                fixed: true,
+                listFolded: true,
+                lrcType: 1
+            });
+        }
+    </script>
 {% endblock %}

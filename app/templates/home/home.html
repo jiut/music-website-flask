@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="zh-CN">
+
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="renderer" content="webkit">
@@ -8,40 +10,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
     <link rel="shortcut icon" href="{{ url_for('static',filename='base/images/logo.png') }}">
     <title>微音乐</title>
-    <link rel="stylesheet" href="{{ url_for('static',filename='base/css/bootstrap.min.css') }}">
-    {#        <link rel="stylesheet" href="{{ url_for('static',filename='base/css/bootstrap-movie.css') }}">#}
+
     <link rel="stylesheet" href="{{ url_for('static',filename='base/css/animate.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='aplayer/dist/APlayer.min.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='base/css/minty.bootstrap.min.css') }}" id="target-css"
+          class="basic">
     <link rel="stylesheet" href="{{ url_for('static',filename='base/css/custom.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static',filename='aplayer/dist/APlayer.min.css') }}"></link>
 
+    {#
+    <link rel="stylesheet" href="{{ url_for('static',filename='base/css/bootstrap-movie.css') }}">#}
 
-    <img src="{{ url_for('static',filename='base/images/logo.png') }}" style="height:30px;" alt="logo">
 
     <script src="{{ url_for('static',filename='base/js/jquery.min.js') }}"></script>
-    <script src="{{ url_for('static',filename='base/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='base/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ url_for('static',filename='base/js/jquery.singlePageNav.min.js') }}"></script>
     <script src="{{ url_for('static',filename='base/js/wow.min.js') }}"></script>
     <script src="{{ url_for('static',filename='lazyload/jquery.lazyload.min.js') }}"></script>
     <script src="{{ url_for('static',filename='aplayer/dist/APlayer.min.js') }}"></script>
-    <script src="{{ url_for('static',filename='base/js/color-thief.umd.js') }}"></script>
 
+{#    <script src="{{ url_for('static',filename='base/js/color-thief.umd.js') }}"></script>#}
+    <script src="{{ url_for('static',filename='base/js/custom.js') }}"></script>
 
     <link rel="icon" href="{{ url_for('static', filename='static/image/document.ico') }}">
 
-
-    <style>
-        .navbar-brand > img {
-            display: inline;
-        }
-
-    </style>
-    <style>
-        .media {
-            padding: 3px;
-            border: 1px solid #ccc
-        }
-
-    </style>
 </head>
 
 <body>
@@ -50,96 +42,71 @@
 
 <script src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
 <!--导航-->
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <!--小屏幕导航按钮和logo-->
-        <div class="navbar-header">
-            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="{{ url_for('home.welcome') }}" class="navbar-brand" style="width:250px;">
-                &nbsp;微音乐
-            </a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #FFF !important;">
+    <div class="container" style="height: 100%; width:91%;">
+        <a class="navbar-brand" href="{{ url_for('home.welcome') }}"
+           style="margin-right: 46px; margin-top: .5rem; margin-bottom: .5rem;">
+            <img src="{{ url_for("static", filename="static/image/logo拷贝.png") }}" alt="微音乐"
+                 style="height: 50px; margin-top: -11px;"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01" style="height: 100%;">
+            <div class="input-group" style="width: 362px; margin-right: auto;">
+                <input id="music-keyword" type="text" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="搜索音乐">
+                <span class="input-group-text" id="search-button">
+                    <img src="{{ url_for("static", filename="static/image/搜索符号.png") }}"
+                                                    alt="搜索" style="width: 15px;"></span>
+            </div>
+            <ul class="navbar-nav" style="height: 100%;">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('home.pop') }}"><span
+                            style="display: inline-block;margin-top: auto;padding: 24px 0;"><span
+                            class="glyphicon glyphicon-headphones"></span> 音乐库
+                                <span class="visually-hidden">(current)</span></span>
+                    </a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('home.login') }}"><span
+                        style="display: inline-block;margin-top: auto;padding: 24px 0;"><span
+                        class="glyphicon glyphicon-log-in"></span>&nbsp;登录</span></a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('home.register') }}"><span
+                        style="display: inline-block; margin-top: auto;padding: 24px 0">
+                                <span class="glyphicon glyphicon-plus"></span>&nbsp;注册</span></a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('home.login') }}"><span
+                        style="display: inline-block; margin-top: auto;padding: 24px 0">
+                                <span class="glyphicon glyphicon-cog"></span>&nbsp;个人中心</span></a>
+                </li>
+            </ul>
         </div>
-        <!--小屏幕导航按钮和logo-->
-        <!--导航-->
-        <div class="navbar-collapse collapse">
-            <form class="navbar-form navbar-left" role="search" style="margin-top:8px;">
-                <div class="form-group input-group">
-                    <input type="text" class="form-control" placeholder="搜索音乐" id="key_music">
-                    <span class="input-group-btn">
-                        <a class="btn btn-default" id="do_search"><span class="glyphicon glyphicon-search"></span>&nbsp;搜索</a>
-                    </span>
-                </div>
-            </form>
-            {% if name %}
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a class="curlink" href="{{ url_for('home.pop') }}"><span
-                                class="glyphicon glyphicon-headphones"></span>&nbsp;音乐库</a>
-                    </li>
-                    <li>
-                        <a class="curlink" href="{{ url_for('home.fav') }}"><span
-                                class="glyphicon glyphicon-user"></span>&nbsp;ID:
-                            {% block username %}
-                            {% endblock %}</a>
-                    </li>
-                    <li>
-                        <a class="curlink" href="{{ url_for('home.out') }}"><span
-                                class="glyphicon glyphicon-log-out"></span>&nbsp;退出</a>
-                    </li>
-                    <li>
-                        <a class="curlink" href="{{ url_for('home.user') }}"><span
-                                class="glyphicon glyphicon-cog"></span>&nbsp;个人中心</a>
-                    </li>
-                </ul>
-            {% else %}
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a class="curlink" href="{{ url_for('home.login') }}"><span
-                                class="glyphicon glyphicon-headphones"></span>&nbsp;音乐库</a>
-                    </li>
-                    <li>
-                        <a class="curlink" href="{{ url_for('home.login') }}"><span
-                                class="glyphicon glyphicon-log-in"></span>&nbsp;登录</a>
-                    </li>
-                    <li>
-                        <a class="curlink" href="{{ url_for('home.register') }}"><span
-                                class="glyphicon glyphicon-plus"></span>&nbsp;注册</a>
-                    </li>
-                    <li>
-                        <a class="curlink" href="{{ url_for('home.login') }}">
-                        <span class="glyphicon glyphicon-cog">
-                        </span>&nbsp;个人中心</a>
-                    </li>
-                </ul>
-
-            {% endif %}
-
-
-        </div>
-        <!--导航-->
-
     </div>
 </nav>
 <!--导航-->
 <!--内容-->
-<div class="container" style="margin-top:50px">
+{#按钮#}
+<div class="container" style="background-color: #FFF; width: 80%;     margin-bottom: 70px;">
+<div class="button-list" style="display: flex; justify-content: space-evenly;">
+        <button type="button" class="btn btn-outline-info">推荐</button>
+        <button type="button" class="btn btn-outline-info">Pop榜</button>
+        <button type="button" class="btn btn-outline-info">Jazz榜</button>
+        <button type="button" class="btn btn-outline-info">R&B榜</button>
+        <button type="button" class="btn btn-outline-info">Classical榜</button>
+        <button type="button" class="btn btn-outline-info">Folk榜</button>
+        <button type="button" class="btn btn-outline-info">我喜欢的音乐</button>
+        <button type="button" class="btn btn-outline-info">已购买</button>
+    </div>
     {% block content %}{% endblock %}
 </div>
 <!--内容-->
 <!--底部-->
 <footer>
-    <div class="container">
+    <div class="container fixed-bottom" id="lyric-footer">
         <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <p>
-                    <br>
+            <div class="col-md-12" style="text-align: center;height: 82px;">
                 <hr>
-                　　
-                </p>
             </div>
         </div>
     </div>
@@ -154,86 +121,15 @@
 
 </script>
 <script>
-
-    var searchCount = 0;
-
     $(document).ready(function () {
-        const ap = new APlayer({
-            container: document.getElementById('aplayer'),
-            fixed: true,
-            listFolded: true,
-            lrcType: 1
-        });
-
-        const colorThief = new ColorThief();
-        const image = new Image();
-        const xhr = new XMLHttpRequest();
-
-        var color = "rgb(183, 218, 255)";
-
-        const setTheme = (index) => {
-            if (typeof (index) === "object") {
-                index = index['index'];
-            }
-            if (!(ap.list.audios[index].theme)) {
-                xhr.onload = function () {
-                    let coverUrl = URL.createObjectURL(this.response);
-                    image.onload = function () {
-                        color = colorThief.getColor(image);
-                        colorset = colorThief.getPalette(image);
-                        colorset.unshift(color)
-
-                        color = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
-                        ap.theme(color, index);
-                        URL.revokeObjectURL(coverUrl);
-                    };
-                    image.src = coverUrl;
-                }
-                xhr.open('GET', ap.list.audios[index].cover, true);
-                xhr.responseType = 'blob';
-                xhr.send();
-            } else {
-                color = ap.list.audios[index].theme;
-            }
-        };
-
-        $("#aplayer").removeClass("aplayer-narrow");
 
         $("img.lazy").lazyload({
             effect: "fadeIn"
         });
 
-        let music = [];
-
-        $("#do_search").click(function () {
-            let keyword = $("#key_music").val();
-            let query = $.get("{{ url_for('home.musicSearch') }}" + "/?key=" + keyword, function (data) {
-                music = data["result"];
-            });
-            $.when(query).done(function () {
-
-                for (let i = 0; i < music.length; i++) {
-                    let musicItem = music[i];
-                    ap.list.add({
-                            name: musicItem["name"],
-                            url: "/queryurl/" + musicItem["id"],
-                            artist: musicItem["ar"],
-                            cover: musicItem["alPic"],
-                            lrc: musicItem["lrc"]
-                        }
-                    );
-                }
-
-                ap.list.switch(searchCount * 30);
-                ap.play();
-                searchCount++;
-
-                setTheme(ap.list.index);
-                ap.on('listswitch', (index) => {
-                    setTheme(index);
-                });
-
-            });
+        $("#search-button").click(function () {
+            let keyword = $("#music-keyword").val();
+            window.open("{{ url_for("home.search") }}" + '?key=' + keyword,'_self');
         });
 
         $("#do_search").keydown(function () {
@@ -242,4 +138,5 @@
     });
 </script>
 </body>
+
 </html>
