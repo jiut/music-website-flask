@@ -1073,6 +1073,8 @@ def musicSearch():
 def queryurl(id):
     f_link = open('./LinkCache.txt', 'r+', encoding="utf-8")
     link_cache = eval(f_link.readline())
+    if link_cache == {}:
+        link_cache = set()
 
     if id in link_cache:
         link = url_for("static", filename="music/" + id + '.mp3')

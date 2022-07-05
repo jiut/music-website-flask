@@ -6,27 +6,43 @@
     <!--内容-->
     {% include "home/menu.html" %}
     <div class="col-md-9">
+    {% for msg in get_flashed_messages(category_filter=["err"]) %}
+                    <div class="toast show text-white bg-danger" role="alert" aria-live="assertive"
+                         aria-atomic="true" style="float: right;">
+                        <div class="toast-header">
+                            <strong class="me-auto">充值失败</strong>
+                            <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast"
+                                    aria-label="Close">
+                                <span aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="toast-body">
+                            {{ msg }}
+                        </div>
+                    </div>
+                {% endfor %}
+                {% for msg in get_flashed_messages(category_filter=["ok"]) %}
+                    <div class="toast show text-white bg-success" role="alert" aria-live="assertive"
+                         aria-atomic="true" style="float: right;">
+                        <div class="toast-header">
+                            <strong class="me-auto">充值成功</strong>
+                            <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast"
+                                    aria-label="Close">
+                                <span aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="toast-body">
+                            {{ msg }}
+                        </div>
+                    </div>
+                {% endfor %}
+    <div style="clear: right;"></div>
         <div class="panel panel-warning">
             <div class="panel-heading">
                 <h3 class="panel-title"><span class="glyphicon glyphicon-piggy-bank"></span>&nbsp;钱包充值</h3>
             </div>
             <div class="panel-body">
-                {% for msg in get_flashed_messages(category_filter=["err"]) %}
-                    <div class="alert alert-danger alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×
-                        </button>
-                        <h4><i class="icon fa fa-check"></i> 充值失败</h4>
-                        {{ msg }}
-                    </div>
-                {% endfor %}
-                {% for msg in get_flashed_messages(category_filter=["ok"]) %}
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×
-                        </button>
-                        <h4><i class="icon fa fa-check"></i> 充值成功</h4>
-                        {{ msg }}
-                    </div>
-                {% endfor %}
+
                 <form role="form" method="post">
                     <fieldset>
                         <div class="form-group">

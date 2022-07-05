@@ -5,39 +5,73 @@
 {% block content %}
     <!--内容-->
     {% include "home/menu.html" %}
+    <style>
+        h5 {
+            font-size: initial;
+        }
+    </style>
     <div class="col-md-9">
-        <div class="panel panel-warning">
-            <div class="panel-heading">
-                <h4 class="panel-title"><span class="glyphicon glyphicon-cd"></span>&nbsp;会员中心</h4>
+        {% for msg in get_flashed_messages(category_filter=["err"]) %}
+            {#                        <div class="alert alert-danger alert-dismissible">#}
+            {#                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×#}
+            {#                            </button>#}
+            {#                            <h4><i class="icon fa fa-check"></i> 订阅失败</h4>#}
+            {#                            {{ msg }}#}
+            {#                        </div>#}
+            <div class="toast show text-white bg-danger" role="alert" aria-live="assertive"
+                 aria-atomic="true" style="float: right;">
+                <div class="toast-header">
+                    <strong class="me-auto">订阅失败</strong>
+                    <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast"
+                            aria-label="Close">
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    {{ msg }}
+                </div>
             </div>
+        {% endfor %}
+        {% for msg in get_flashed_messages(category_filter=["ok"]) %}
+            <div class="toast show text-white bg-success" role="alert" aria-live="assertive"
+                 aria-atomic="true" style="float: right;">
+                <div class="toast-header">
+                    <strong class="me-auto">订阅成功</strong>
+                    <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast"
+                            aria-label="Close">
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    {{ msg }}
+                </div>
+            </div>
+            {#                        <div class="alert alert-success alert-dismissible">#}
+            {#                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×#}
+            {#                            </button>#}
+            {#                            <h4><i class="icon fa fa-check"></i> 订阅成功</h4>#}
+            {#                            {{ msg }}#}
+            {#                        </div>#}
+        {% endfor %}
+        <div style="clear: right;"></div>
+        <div class="panel panel-warning" style="padding-left: 130px;">
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-cd"></span>&nbsp;会员中心</h3>
+            </div>
+
             <div>
+
                 <div class="form-group">
-                    {% for msg in get_flashed_messages(category_filter=["err"]) %}
-                        <div class="alert alert-danger alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×
-                            </button>
-                            <h4><i class="icon fa fa-check"></i> 订阅失败</h4>
-                            {{ msg }}
-                        </div>
-                    {% endfor %}
-                    {% for msg in get_flashed_messages(category_filter=["ok"]) %}
-                        <div class="alert alert-success alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×
-                            </button>
-                            <h4><i class="icon fa fa-check"></i> 订阅成功</h4>
-                            {{ msg }}
-                        </div>
-                    {% endfor %}
-                    <h3>&emsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-headphones"></span>&nbsp;订阅会员：</h3>
-                    <div style="margin-top: 20px;margin-left: 100px">
-                        <strong>订阅会员可以无限畅听所有歌曲</strong></span>
+
+                    <div style="margin-left: 100px; padding-left: 80px;">
+                        <span>订阅会员可以无限畅听所有歌曲</span>
 
                         <h5>
                             &nbsp;<span class="glyphicon glyphicon-tag">&nbsp;<strong>会员资费为15元</strong></span>
                         </h5>
                         <h5>
                             &nbsp;<span class="glyphicon glyphicon-calendar">&nbsp;<strong>会员有效期为30天</strong></span><br>
-                            <a href="{{ url_for('home.getsub') }}" class="btn btn-primary" style="margin-top: 20px"
+                            <a href="{{ url_for('home.getsub') }}" class="btn btn-primary" style="width: unset;"
                                role="button"><span class="glyphicon glyphicon-equalizer" style=""></span>&nbsp;确认订阅</a>
                         </h5>
                     </div>

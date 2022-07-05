@@ -100,14 +100,6 @@
     <!--内容-->
     <script>
         $(document).ready(function () {
-            $("#sendCode").click(function () {
-                $.get("http://localhost:3000/captcha/sent?phone=" + "{{ phone }}");
-                alert("验证码已发送至绑定手机号")
-            })
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
             if (typeof ap === 'undefined') {
                 const ap = new APlayer({
                     container: document.getElementById('aplayer'),
@@ -116,6 +108,16 @@
                     lrcType: 1
                 });
             }
+
+            $(".nav-link")[0].style.display = "none";
+
+            let url = window.location.href;
+            let reg = new RegExp("/\?phone=([0-9]+)");
+            let phone = url.match(reg)[1];
+            $("#sendCode").click(function () {
+                $.get("http://localhost:3000/captcha/sent?phone=" + phone);
+                alert("验证码已发送至绑定手机号")
+            })
         });
     </script>
 {% endblock %}

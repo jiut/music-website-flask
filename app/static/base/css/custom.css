@@ -1,3 +1,23 @@
+.glyphicon-equalizer:before {
+    content: "\e210";
+}
+
+.glyphicon-piggy-bank:before {
+    content: "\e225";
+}
+
+.glyphicon-cd:before {
+    content: "\e201";
+}
+
+.glyphicon-calendar:before {
+    content: "\e109";
+}
+
+.glyphicon-tag:before {
+    content: "\e041";
+}
+
 .table-hover thead {
     white-space: nowrap;
 }
