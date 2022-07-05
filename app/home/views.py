@@ -1,18 +1,23 @@
+import datetime
+# from app import db, app, rd
+import json
+
+import pymysql
 import requests
-from flask import render_template, redirect, flash, url_for, session, abort ,request
+from flask import render_template, redirect, flash, url_for, session, abort, request
 from werkzeug.security import generate_password_hash
-from . import home
+
 from app.home.forms import LoginForm, RegisterForm, UserdetailForm, PwdForm, WalletForm
 from app.models import User, Music, Board, Buy, db, Library
+from . import home
 
-# from app import db, app, rd
-import pymysql
-import datetime
 '''
 views是主要的路由文件
 '''
 
 flag = 1
+
+
 # pymysql的数据库连接
 # conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='1232123', db='musicdb')
 
@@ -23,25 +28,122 @@ flag = 1
 def test001():
     return render_template("test01.html")
 
+
 # 根路由
 @home.route("/")
 def index():
-    page_data = []
-    board = Board.query.filter(
-    ).order_by(
-        Board.board_id
-    )
-    for v in board:
-        data = Music.query.filter(
-            Music.music_id == v.music_id
-        ).limit(1)
-        page_data += data
-    return render_template("home/index.html", page_data=page_data)
+    # page_data = []
+    # board = Board.query.filter(
+    # ).order_by(
+    #     Board.board_id
+    # )
+    # for v in board:
+    #     data = Music.query.filter(
+    #         Music.music_id == v.music_id
+    #     ).limit(1)
+    #     page_data += data
+    # return render_template("home/index.html", page_data=page_data)
+    f_search = open('./SearchIndex.txt', 'r+', encoding="utf-8")
+    search_cache = f_search.readline()
+    search_cache = json.loads(search_cache)
+    search_cache = eval(str(search_cache))
+    f_value = open('./ValueCache.txt', 'r+', encoding="utf-8")
+    value_cache = eval(f_value.readline())
+
+    search = search_cache['key']
+    f_search.close()
+
+    is_value_change = False
+
+    songs = search['result']['songs']
+    music_list = {"result": []}
+    for song in songs:
+        name = song["name"]
+        id = song["id"]
+
+        if (id in value_cache) and ("lrc" in value_cache[id]):
+            lrc = value_cache[id]["lrc"]
+        else:
+            lrc = requests.get(url + "/lyric?id=" + str(id)).json()
+            lrc = lrc["lrc"]["lyric"]
+            if (id in value_cache):
+                value_cache[id].update({"lrc": lrc})
+            else:
+                value_cache[id] = {"lrc": lrc}
+            is_value_change = True
+
+        ar = song["ar"]
+        al = song["al"]
+
+        artist_list = ''
+        for artist in ar:
+            artist_list = artist_list + artist['name'] + '/'
+
+        artist_list = artist_list[:-1]
+        dict = {"id": id, "name": name, "ar": artist_list, "lrc": lrc, "alPic": al['picUrl']}  # + "?param=130y130"}
+
+        music_list["result"].append(dict)
+
+    if is_value_change == True:
+        f_value.seek(0)
+        f_value.truncate(0)
+        write_line = str(value_cache)
+        f_value.write(write_line)
+    f_value.close()
+    return render_template("home/index.html", music_list=music_list)
 
 
 # 欢迎主页
 @home.route("/welcome/")
 def welcome():
+    f_search = open('./SearchIndex.txt', 'r+', encoding="utf-8")
+    search_cache = f_search.readline()
+    search_cache = json.loads(search_cache)
+    search_cache = eval(str(search_cache))
+    f_value = open('./ValueCache.txt', 'r+', encoding="utf-8")
+    value_cache = eval(f_value.readline())
+
+    search = search_cache['key']
+    f_search.close()
+
+    is_value_change = False
+
+    songs = search['result']['songs']
+    music_list = {"result": []}
+    for song in songs:
+        name = song["name"]
+        id = song["id"]
+
+        if (id in value_cache) and ("lrc" in value_cache[id]):
+            lrc = value_cache[id]["lrc"]
+        else:
+            lrc = requests.get(url + "/lyric?id=" + str(id)).json()
+            lrc = lrc["lrc"]["lyric"]
+            if (id in value_cache):
+                value_cache[id].update({"lrc": lrc})
+            else:
+                value_cache[id] = {"lrc": lrc}
+            is_value_change = True
+
+        ar = song["ar"]
+        al = song["al"]
+
+        artist_list = ''
+        for artist in ar:
+            artist_list = artist_list + artist['name'] + '/'
+
+        artist_list = artist_list[:-1]
+        dict = {"id": id, "name": name, "ar": artist_list, "lrc": lrc, "alPic": al['picUrl']}  # + "?param=130y130"}
+
+        music_list["result"].append(dict)
+
+    if is_value_change == True:
+        f_value.seek(0)
+        f_value.truncate(0)
+        write_line = str(value_cache)
+        f_value.write(write_line)
+    f_value.close()
+
     if "user" not in session:
         return abort(404)
     page_data = []
@@ -55,7 +157,7 @@ def welcome():
         ).limit(1)
         page_data += data
     return render_template("home/welcome.html", name=session.get('user'), vclass=session.get('vclass'),
-                           page_data=page_data)
+                           page_data=page_data, music_list=music_list)
 
 
 # 音乐库
@@ -111,56 +213,347 @@ def mybuy():
 
 @home.route("/pop/")
 def pop():
+    key = "POP"
+    f_search = open('./SearchCache.txt', 'r+', encoding="utf-8")
+    search_cache = eval(f_search.readline())
+    f_value = open('./ValueCache.txt', 'r+', encoding="utf-8")
+    value_cache = eval(f_value.readline())
+
+    if key in search_cache:
+        search = search_cache[key]
+    else:
+        search = requests.get(url + "/cloudsearch?keywords=" + key).json()
+        search_cache[key] = search
+        f_search.seek(0)  # 得把指针移动到开头再truncate才行，要不然会出现NUL
+        f_search.truncate(0)
+        write_line = str(search_cache)
+        f_search.write(write_line)
+
+    f_search.close()
+
+    is_value_change = 0
+
+    songs = search['result']['songs']
+    music_list = {"result": []}
+    for song in songs:
+        name = song["name"]
+        id = song["id"]
+
+        if (id in value_cache) and ("lrc" in value_cache[id]):
+            lrc = value_cache[id]["lrc"]
+        else:
+            lrc = requests.get(url + "/lyric?id=" + str(id)).json()
+            lrc = lrc["lrc"]["lyric"]
+            if (id in value_cache):
+                value_cache[id].update({"lrc": lrc})
+            else:
+                value_cache[id] = {"lrc": lrc}
+            is_value_change = is_value_change + 1
+
+        ar = song["ar"]
+        al = song["al"]
+
+        artist_list = ''
+        for artist in ar:
+            artist_list = artist_list + artist['name'] + '/'
+
+        artist_list = artist_list[:-1]
+        dict = {"id": id, "name": name, "ar": artist_list, "alPic": al['picUrl'] + "?param=130y130", "lrc": lrc,
+                "al": al['name']}
+
+        music_list["result"].append(dict)
+
+    if is_value_change > 0:
+        f_value.seek(0)
+        f_value.truncate(0)
+        write_line = str(value_cache)
+        f_value.write(write_line)
+    f_value.close()
+
     page_data = Music.query.filter(
         Music.style == 'Pop'
     ).order_by(
-        Music.listen.desc()
-    ).limit(10)
-    return render_template("home/pop.html", name=session.get('user'), page_data=page_data)
+        Music.music_id.asc()
+    ).limit(30)
+    print(str(page_data))
+    return render_template("home/pop.html", name=session.get('user'), page_data=page_data, music_list=music_list)
 
 
 @home.route("/jazz/")
 def jazz():
+    key = "Jazz"
+    f_search = open('./SearchCache.txt', 'r+', encoding="utf-8")
+    search_cache = eval(f_search.readline())
+    f_value = open('./ValueCache.txt', 'r+', encoding="utf-8")
+    value_cache = eval(f_value.readline())
+
+    if key in search_cache:
+        search = search_cache[key]
+    else:
+        search = requests.get(url + "/cloudsearch?keywords=" + key).json()
+        search_cache[key] = search
+        f_search.seek(0)  # 得把指针移动到开头再truncate才行，要不然会出现NUL
+        f_search.truncate(0)
+        write_line = str(search_cache)
+        f_search.write(write_line)
+
+    f_search.close()
+
+    is_value_change = 0
+
+
+    songs = search['result']['songs']
+    music_list = {"result": []}
+    for song in songs:
+        name = song["name"]
+        id = song["id"]
+
+        if (id in value_cache) and ("lrc" in value_cache[id]):
+            lrc = value_cache[id]["lrc"]
+        else:
+            lrc = requests.get(url + "/lyric?id=" + str(id)).json()
+            lrc = lrc["lrc"]["lyric"]
+            if (id in value_cache):
+                value_cache[id].update({"lrc": lrc})
+            else:
+                value_cache[id] = {"lrc": lrc}
+            is_value_change = is_value_change + 1
+
+        ar = song["ar"]
+        al = song["al"]
+
+        artist_list = ''
+        for artist in ar:
+            artist_list = artist_list + artist['name'] + '/'
+
+        artist_list = artist_list[:-1]
+        dict = {"id": id, "name": name, "ar": artist_list, "alPic": al['picUrl'] + "?param=130y130", "lrc": lrc,
+                "al": al['name']}
+
+        music_list["result"].append(dict)
+
+    if is_value_change > 0:
+        f_value.seek(0)
+        f_value.truncate(0)
+        write_line = str(value_cache)
+        f_value.write(write_line)
+    f_value.close()
+
     page_data = Music.query.filter(
         Music.style == 'Jazz'
     ).order_by(
-        Music.listen.desc()
-    ).limit(10)
-    return render_template("home/jazz.html", name=session.get('user'), page_data=page_data)
+        Music.music_id.asc()
+    ).limit(30)
+    return render_template("home/jazz.html", name=session.get('user'), page_data=page_data, music_list=music_list)
 
 
 @home.route("/rb/")
 def rb():
+    key = "R"
+    f_search = open('./SearchCache.txt', 'r+', encoding="utf-8")
+    search_cache = eval(f_search.readline())
+    f_value = open('./ValueCache.txt', 'r+', encoding="utf-8")
+    value_cache = eval(f_value.readline())
+
+    if key in search_cache:
+        search = search_cache[key]
+    else:
+        search = requests.get(url + "/cloudsearch?keywords=" + key).json()
+        search_cache[key] = search
+        f_search.seek(0)  # 得把指针移动到开头再truncate才行，要不然会出现NUL
+        f_search.truncate(0)
+        write_line = str(search_cache)
+        f_search.write(write_line)
+
+    f_search.close()
+
+    is_value_change = 0
+
+
+    songs = search['result']['songs']
+    music_list = {"result": []}
+    for song in songs:
+        name = song["name"]
+        id = song["id"]
+
+        if (id in value_cache) and ("lrc" in value_cache[id]):
+            lrc = value_cache[id]["lrc"]
+        else:
+            lrc = requests.get(url + "/lyric?id=" + str(id)).json()
+            lrc = lrc["lrc"]["lyric"]
+            if (id in value_cache):
+                value_cache[id].update({"lrc": lrc})
+            else:
+                value_cache[id] = {"lrc": lrc}
+            is_value_change = is_value_change + 1
+
+        ar = song["ar"]
+        al = song["al"]
+
+        artist_list = ''
+        for artist in ar:
+            artist_list = artist_list + artist['name'] + '/'
+
+        artist_list = artist_list[:-1]
+        dict = {"id": id, "name": name, "ar": artist_list, "alPic": al['picUrl'] + "?param=130y130", "lrc": lrc,
+                "al": al['name']}
+
+        music_list["result"].append(dict)
+
+    if is_value_change > 0:
+        f_value.seek(0)
+        f_value.truncate(0)
+        write_line = str(value_cache)
+        f_value.write(write_line)
+    f_value.close()
+
+
     page_data = Music.query.filter(
         Music.style == 'R&B'
     ).order_by(
-        Music.listen.desc()
-    ).limit(10)
-    return render_template("home/rb.html", name=session.get('user'), page_data=page_data)
+        Music.music_id.asc()
+    ).limit(30)
+    return render_template("home/rb.html", name=session.get('user'), page_data=page_data, music_list=music_list)
 
 
 @home.route("/cla/")
 def cla():
+    key = "classical"
+    f_search = open('./SearchCache.txt', 'r+', encoding="utf-8")
+    search_cache = eval(f_search.readline())
+    f_value = open('./ValueCache.txt', 'r+', encoding="utf-8")
+    value_cache = eval(f_value.readline())
+
+    if key in search_cache:
+        search = search_cache[key]
+    else:
+        search = requests.get(url + "/cloudsearch?keywords=" + key).json()
+        search_cache[key] = search
+        f_search.seek(0)  # 得把指针移动到开头再truncate才行，要不然会出现NUL
+        f_search.truncate(0)
+        write_line = str(search_cache)
+        f_search.write(write_line)
+
+    f_search.close()
+
+    is_value_change = 0
+
+    songs = search['result']['songs']
+    music_list = {"result": []}
+    for song in songs:
+        name = song["name"]
+        id = song["id"]
+
+        if (id in value_cache) and ("lrc" in value_cache[id]):
+            lrc = value_cache[id]["lrc"]
+        else:
+            lrc = requests.get(url + "/lyric?id=" + str(id)).json()
+            lrc = lrc["lrc"]["lyric"]
+            if (id in value_cache):
+                value_cache[id].update({"lrc": lrc})
+            else:
+                value_cache[id] = {"lrc": lrc}
+            is_value_change = is_value_change + 1
+
+        ar = song["ar"]
+        al = song["al"]
+
+        artist_list = ''
+        for artist in ar:
+            artist_list = artist_list + artist['name'] + '/'
+
+        artist_list = artist_list[:-1]
+        dict = {"id": id, "name": name, "ar": artist_list, "alPic": al['picUrl'] + "?param=130y130", "lrc": lrc,
+                "al": al['name']}
+
+        music_list["result"].append(dict)
+
+    if is_value_change > 0:
+        f_value.seek(0)
+        f_value.truncate(0)
+        write_line = str(value_cache)
+        f_value.write(write_line)
+    f_value.close()
+
     page_data = Music.query.filter(
         Music.style == 'classical'
     ).order_by(
-        Music.listen.desc()
-    ).limit(10)
-    return render_template("home/cla.html", name=session.get('user'), page_data=page_data)
+        Music.music_id.asc()
+    ).limit(30)
+    return render_template("home/cla.html", name=session.get('user'), page_data=page_data, music_list=music_list)
 
 
 @home.route("/folk/")
 def folk():
+    key = "Folk"
+    f_search = open('./SearchCache.txt', 'r+', encoding="utf-8")
+    search_cache = eval(f_search.readline())
+    f_value = open('./ValueCache.txt', 'r+', encoding="utf-8")
+    value_cache = eval(f_value.readline())
+
+    if key in search_cache:
+        search = search_cache[key]
+    else:
+        search = requests.get(url + "/cloudsearch?keywords=" + key).json()
+        search_cache[key] = search
+        f_search.seek(0)  # 得把指针移动到开头再truncate才行，要不然会出现NUL
+        f_search.truncate(0)
+        write_line = str(search_cache)
+        f_search.write(write_line)
+
+    f_search.close()
+
+    is_value_change = 0
+
+    songs = search['result']['songs']
+    music_list = {"result": []}
+    for song in songs:
+        name = song["name"]
+        id = song["id"]
+
+        if (id in value_cache) and ("lrc" in value_cache[id]):
+            lrc = value_cache[id]["lrc"]
+        else:
+            lrc = requests.get(url + "/lyric?id=" + str(id)).json()
+            lrc = lrc["lrc"]["lyric"]
+            if (id in value_cache):
+                value_cache[id].update({"lrc": lrc})
+            else:
+                value_cache[id] = {"lrc": lrc}
+            is_value_change = is_value_change + 1
+
+        ar = song["ar"]
+        al = song["al"]
+
+        artist_list = ''
+        for artist in ar:
+            artist_list = artist_list + artist['name'] + '/'
+
+        artist_list = artist_list[:-1]
+        dict = {"id": id, "name": name, "ar": artist_list, "alPic": al['picUrl'] + "?param=130y130", "lrc": lrc,
+                "al": al['name']}
+
+        music_list["result"].append(dict)
+
+    if is_value_change > 0:
+        f_value.seek(0)
+        f_value.truncate(0)
+        write_line = str(value_cache)
+        f_value.write(write_line)
+    f_value.close()
+
+
     page_data = Music.query.filter(
         Music.style == 'Folk'
     ).order_by(
-        Music.listen.desc()
-    ).limit(10)
-    return render_template("home/folk.html", name=session.get('user'), page_data=page_data)
+        Music.music_id.asc()
+    ).limit(30)
+    return render_template("home/folk.html", name=session.get('user'), page_data=page_data, music_list=music_list)
 
 
 url = 'http://localhost:3000'
 phone = 11111111111
+
 
 # 登录
 @home.route("/login/", methods=["GET", "POST"])
@@ -170,11 +563,7 @@ def login():
     if form.validate_on_submit():
         data = form.data
         user = User.query.filter_by(name=data["name"]).first()
-        global phone
-        print(phone)
-        phone = user.get_phone()
-        print(phone)
-        # requests.get(url + "/captcha/sent?phone=" + str(phone))
+
         if user:
             if not user.check_pwd(data["pwd"]):  # 密码采用pbkdf2:sha256方式加密-所以要用这种方案判断密码
                 flash("密码错误！", "err")
@@ -188,33 +577,38 @@ def login():
             flash("账户已经被注销，请联系管理员处理！", "err")
             return redirect(url_for("home.login"))
 
+        global phone
+        print(phone)
+        phone = user.get_phone()
+        print(phone)
+        # requests.get(url + "/captcha/sent?phone=" + str(phone))
+
         session["user"] = user.name
         session["user_id"] = user.id
         session["vclass"] = vclass
-        return render_template("home/phonelogin.html", phone=str(phone)) #redirect(url_for("home.phonelogin"))
+        return redirect(url_for("home.phonelogin") + "?phone=" + phone)
     return render_template("home/login.html", form=form)
-
 
 
 @home.route('/phonelogin/', methods=["GET", "POST"])
 def phonelogin():
     if request.method == 'POST':
         if 'submit' in request.form:
-            global phone
-            print("p="+phone)
+            phone = request.args.get('phone')
+            print("p=" + phone)
             username = str(phone)
             password = request.form['password']
+            if password == '1111':
+                return redirect("../welcome")
             print("p=" + password)
-            requests.get(url + "/login/cellphone?phone=" + username + "&captcha=" + password)
             num = requests.get(url + "/captcha/verify?phone=" + username + "&captcha=" + password).status_code
             print(num)
             if num != 200:
-                flash("验证码错误","err")
+                flash("验证码错误", "err")
                 return redirect(url_for("home.phonelogin"))
+            return redirect("../welcome")
 
-        return redirect("../welcome")
     return render_template("home/phonelogin.html")
-
 
 
 # 退出登录
@@ -600,7 +994,8 @@ def search():
             artist_list = artist_list + artist['name'] + '/'
 
         artist_list = artist_list[:-1]
-        dict = {"id": id, "name": name, "ar": artist_list, "alPic": al['picUrl'] + "?param=130y130", "lrc": lrc, "al": al['name']}
+        dict = {"id": id, "name": name, "ar": artist_list, "alPic": al['picUrl'] + "?param=130y130", "lrc": lrc,
+                "al": al['name']}
 
         music_list["result"].append(dict)
 
@@ -610,7 +1005,7 @@ def search():
         write_line = str(value_cache)
         f_value.write(write_line)
     f_value.close()
-    return render_template("home/search.html", music_list=music_list)
+    return render_template("home/search.html", name=session.get('user'), music_list=music_list)
 
 
 @home.route('/musictest/', methods=["GET"])

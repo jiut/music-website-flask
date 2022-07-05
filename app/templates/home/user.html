@@ -4,6 +4,9 @@
 {% endblock %}
 {% block content %}
     <!--内容-->
+    <style>
+
+    </style>
     {% include "home/menu.html" %}
     <div class="col-md-9">
         <div class="panel panel-warning">
@@ -88,5 +91,17 @@
         $(document).ready(function () {
             $("#m1").addClass("active");
         })
+    </script>
+    <script>
+        $(document).ready(function () {
+            if (typeof ap === 'undefined') {
+                const ap = new APlayer({
+                    container: document.getElementById('aplayer'),
+                    fixed: true,
+                    listFolded: true,
+                    lrcType: 1
+                });
+            }
+        });
     </script>
 {% endblock %}

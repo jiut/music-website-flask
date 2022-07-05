@@ -1,5 +1,9 @@
 {% extends "home/home.html" %}
 
+{% block username %}
+    {{ name }}
+{% endblock %}
+
 {% block content %}
     <style>
         #search-result img {
@@ -47,19 +51,17 @@
                             name: musicItem["name"],
                             url: "/queryurl/" + musicItem["id"],
                             artist: musicItem["ar"],
-                            cover: musicItem["alPic"],
+                            cover: musicItem["alPic"] + "?param=130y130",
                             lrc: musicItem["lrc"]
                         }
                     );
                 }
                 $("tr").click(function () {
-                    if (this.id > '0' && this.id <= '30') {
-                        ap.list.switch(parseInt(this.id)-1);
-                        ap.play();
-                    }
+                    let id = parseInt(this.id);
+                    ap.list.switch(id-1);
+                    ap.play();
                 });
             }
         });
     </script>
-
 {% endblock %}

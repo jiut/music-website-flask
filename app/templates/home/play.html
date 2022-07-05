@@ -17,6 +17,17 @@
         <a href="{{ url_for('home.download',id=mus.music_id) }}" target="_blank" class="btn btn-default" role="button">
             <span class="glyphicon glyphicon-download"></span>&nbsp;下载</a>
     {% endif %}
-
+<script>
+        $(document).ready(function () {
+            if (typeof ap === 'undefined') {
+                const ap = new APlayer({
+                    container: document.getElementById('aplayer'),
+                    fixed: true,
+                    listFolded: true,
+                    lrcType: 1
+                });
+            }
+        });
+    </script>
 {% endblock %}
 </div>

@@ -55,6 +55,7 @@ class Music(db.Model):
     style = db.Column(db.String(50), nullable=True)  # 歌曲风格
     free = db.Column(db.Integer, nullable=False)  # 是否免费
     address = db.Column(db.String(100), nullable=True)  # 歌曲地址
+    album = db.Column(db.String(100), nullable=False)
 
     # music = db.relationship('Library', backref="music")
 

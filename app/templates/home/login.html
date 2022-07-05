@@ -2,8 +2,26 @@
 
 {% block content %}
     <!--内容-->
-    <div class="container" style="margin-top:1px">
-        <div class="row">
+    <style>
+        .btn {
+            width: 100%;
+            height: 50px;
+            font-size: 20px;
+            margin-top: 6px;
+            border-radius: 1.3rem;
+        }
+
+        .form-group .form-control {
+            border-radius: 1.3rem;
+        }
+
+        label {
+            margin-bottom: 3px;
+            margin-top: 5px;
+        }
+    </style>
+    <div class="container" style="padding-top: 38px; min-height: 68vh;">
+        <div class="row" style="height: 100%;">
             <div class="col-md-4 col-md-offset-4">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -11,20 +29,48 @@
                     </div>
                     <div class="panel-body">
                         {% for msg in get_flashed_messages(category_filter=["err"]) %}
-                            <div class="alert alert-danger alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×
-                                </button>
-                                <h4><i class="icon fa fa-check"></i> 操作失败</h4>
-                                {{ msg }}
+                            <div class="toast show text-white bg-danger" role="alert" aria-live="assertive"
+                                 aria-atomic="true">
+                                <div class="toast-header">
+                                    <strong class="me-auto">操作失败</strong>
+                                    <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast"
+                                            aria-label="Close">
+                                        <span aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                                <div class="toast-body">
+                                    {{ msg }}
+                                </div>
                             </div>
+
+{#                            <div class="alert alert-danger alert-dismissible">#}
+{#                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×#}
+{#                                </button>#}
+{#                                <h4><i class="icon fa fa-check"></i>操作失败</h4>#}
+{#                                {{ msg }}#}
+{#                            </div>#}
                         {% endfor %}
                         {% for msg in get_flashed_messages(category_filter=["ok"]) %}
-                            <div class="alert alert-success alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×
-                                </button>
-                                <h4><i class="icon fa fa-check"></i> 操作成功</h4>
-                                {{ msg }}
+                            <div class="toast show text-white bg-success" role="alert" aria-live="assertive"
+                                 aria-atomic="true">
+                                <div class="toast-header">
+                                    <strong class="me-auto">操作成功</strong>
+                                    <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast"
+                                            aria-label="Close">
+                                        <span aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                                <div class="toast-body">
+                                    {{ msg }}
+                                </div>
                             </div>
+
+                            {#                            <div class="alert alert-success alert-dismissible">#}
+                            {#                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×#}
+                            {#                                </button>#}
+                            {#                                <h4><i class="icon fa fa-check"></i> 操作成功</h4>#}
+                            {#                                {{ msg }}#}
+                            {#                            </div>#}
                         {% endfor %}
                         <form role="form" method="post">
                             <fieldset>
@@ -52,10 +98,14 @@
                                     {% endfor %}
                                     {#                                <input id="input_password" class="form-control input-lg" placeholder="密码" name="password" type="password" value="">#}
                                 </div>
-                            <div class="col-md-12" id="error_password"></div>
-                            <a href = "../admin">管理员登录</a>
+                                <div class="col-md-12" id="error_password"></div>
+
                                 {{ form.csrf_token }}
                                 {{ form.submit }}
+                                <a href="../admin">
+                                    <button type="button" class="btn btn-outline-primary">管理员登录</button>
+                                </a>
+
                                 {#                            <a href="{{ url_for('home.user') }}" class="btn btn-lg btn-success btn-block" >登录</a>#}
                             </fieldset>
                         </form>
@@ -65,5 +115,16 @@
         </div>
     </div>
     <!--内容-->
-
+<script>
+        $(document).ready(function () {
+            if (typeof ap === 'undefined') {
+                const ap = new APlayer({
+                    container: document.getElementById('aplayer'),
+                    fixed: true,
+                    listFolded: true,
+                    lrcType: 1
+                });
+            }
+        });
+    </script>
 {% endblock %}

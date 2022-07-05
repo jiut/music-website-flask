@@ -7,14 +7,23 @@
 
 {% block content %}
 
-    <ul class="nav nav-tabs">
-        <li class="active"><a href="{{ url_for('home.fav') }}">我喜欢的音乐</a></li>
-        <li><a href="{{ url_for('home.mybuy') }}">已购买</a></li>
-        <li><a href="{{ url_for('home.pop') }}">Pop榜</a></li>
-        <li><a href="{{ url_for('home.jazz') }}">Jazz榜</a></li>
-        <li><a href="{{ url_for('home.rb') }}">R&B榜</a></li>
-        <li><a href="{{ url_for('home.cla') }}">Classical榜</a></li>
-        <li><a href="{{ url_for('home.folk') }}">Folk榜</a></li>
+    <ul class="nav nav-tabs nav-justified" style="white-space: nowrap;">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home.pop') }}">Pop榜</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home.jazz') }}">Jazz榜</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home.rb') }}">R&B榜</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home.cla') }}">Classical榜</a>
+        </li>
+    <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home.folk') }}">Folk榜</a>
+        </li>
+
     </ul>
 
     <div class="col-md-12">
@@ -60,5 +69,16 @@
         {% endfor %}
 
     </div>
-
+<script>
+        $(document).ready(function () {
+            if (typeof ap === 'undefined') {
+                const ap = new APlayer({
+                    container: document.getElementById('aplayer'),
+                    fixed: true,
+                    listFolded: true,
+                    lrcType: 1
+                });
+            }
+        });
+    </script>
 {% endblock %}

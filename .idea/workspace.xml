@@ -1,39 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="989c8214-9567-4c55-bbd1-d2d978e22d9d" name="Default Changelist" comment="取色成功">
-      <change afterPath="$PROJECT_DIR$/app/static/base/css/minty.bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/base/images/1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/base/images/2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/base/images/3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/base/images/icon_first.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/base/images/icon_second.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/base/images/icon_third.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/base/images/top1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/base/images/top2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/base/images/top3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/base/images/top4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/base/images/top5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/base/images/zyboy.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/base/images/周杰伦.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/base/images/周深.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/base/images/张杰.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/base/images/林俊杰.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/base/images/陈奕迅.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/base/js/collapse.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/base/js/custom.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/static/image/logo拷贝.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/static/image/搜索符号.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Sql_p.xml" beforeDir="false" />
+    <list default="true" id="989c8214-9567-4c55-bbd1-d2d978e22d9d" name="Default Changelist" comment="首页样式">
+      <change afterPath="$PROJECT_DIR$/app/static/base/images/新歌.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/base/images/欧美.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/base/images/热歌.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/base/images/飙升.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/home/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/base/css/bootstrap.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/base/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/static/base/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/base/css/custom.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/base/js/bootstrap.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/base/js/bootstrap.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/home/cla.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home/cla.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/home/fav.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home/fav.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/home/folk.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home/folk.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/home/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/home/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/home/jazz.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home/jazz.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/home/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/home/mybuy.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home/mybuy.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/home/phonelogin.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home/phonelogin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/home/play.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home/play.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/home/pop.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home/pop.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/home/rb.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home/rb.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/home/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home/register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/home/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/home/subscribe.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home/subscribe.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/home/user.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home/user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/home/wallet.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home/wallet.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/home/welcome.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home/welcome.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,25 +67,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Files/source/music-website-flask/app/static/base/images",
-    "list.type.of.created.stylesheet": "CSS",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Files/source/music-website-flask/app/static/base/images&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Files\source\music-website-flask\app\static\base\images" />
+      <recent name="D:\Files\source\music-website-flask\app\templates\home" />
       <recent name="D:\Files\source\music-website-flask\app\static\static\image" />
       <recent name="D:\Files\source\music-website-flask\app\static\base\css" />
       <recent name="D:\Files\source\music-website-flask\app\static\base\js" />
-      <recent name="D:\Files\source\untitled2备份\app\static" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Files\source\music-website-flask" />
+      <recent name="D:\Files\source\music-website-flask\app\templates\home" />
       <recent name="D:\Files\source\music-website-flask\app\static\base\images" />
     </key>
   </component>
@@ -184,7 +179,9 @@
       <workItem from="1656812139348" duration="13736000" />
       <workItem from="1656893941273" duration="10837000" />
       <workItem from="1656907998923" duration="19039000" />
-      <workItem from="1656936544889" duration="7855000" />
+      <workItem from="1656936544889" duration="30786000" />
+      <workItem from="1656973982035" duration="2147000" />
+      <workItem from="1656978601055" duration="816000" />
     </task>
     <task id="LOCAL-00001" summary="合并前修改">
       <created>1656754824406</created>
@@ -200,7 +197,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656811243641</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="首页样式">
+      <created>1656947567473</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1656947567473</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,21 +224,32 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="合并前修改" />
     <MESSAGE value="取色成功" />
-    <option name="LAST_COMMIT_MESSAGE" value="取色成功" />
+    <MESSAGE value="首页样式" />
+    <option name="LAST_COMMIT_MESSAGE" value="首页样式" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/app/home/views.py</url>
-          <line>297</line>
+          <line>691</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/home/views.py</url>
+          <line>772</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/app/templates/home/index.html</url>
+          <line>685</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/music_website_flask$Sql_p.coverage" NAME="Sql_p 覆盖结果" MODIFIED="1656940701200" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/music_website_flask$Sql_p.coverage" NAME="Sql_p 覆盖结果" MODIFIED="1656979413337" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/untitled2$untitled2.coverage" NAME="untitled2 覆盖结果" MODIFIED="1656741867049" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

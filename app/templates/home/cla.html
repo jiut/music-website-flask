@@ -1,50 +1,78 @@
 {% extends "home/home.html" %}
 
-
 {% block username %}
     {{ name }}
 {% endblock %}
 
 {% block content %}
+    <ul class="nav nav-tabs nav-justified" style="white-space: nowrap;">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home.pop') }}">Pop榜</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home.jazz') }}">Jazz榜</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home.rb') }}">R&B榜</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home.cla') }}">Classical榜</a>
+        </li>
+    <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home.folk') }}">Folk榜</a>
+        </li>
 
-    <ul class="nav nav-tabs">
-        <li><a href="{{ url_for('home.fav') }}">我喜欢的音乐</a></li>
-        <li><a href="{{ url_for('home.mybuy') }}">已购买</a></li>
-        <li><a href="{{ url_for('home.pop') }}">Pop榜</a></li>
-        <li><a href="{{ url_for('home.jazz') }}">Jazz榜</a></li>
-        <li><a href="{{ url_for('home.rb') }}">R&B榜</a></li>
-        <li class="active"><a href="{{ url_for('home.cla') }}">Classical榜</a></li>
-        <li><a href="{{ url_for('home.folk') }}">Folk榜</a></li>
     </ul>
 
-
-    <div class="col-md-12">
-    <div class="row wow fadeIn" data-wow-delay="0.2s">
-        {% for v in page_data %}
-            <div class="media">
-                <div class="media-left" style="width: 5000px;margin-right: 400px">
-                    {#                    <a href="{{ url_for('home.play',id=v.music_id) }}">#}
-                    <h4>{{ loop.index }}-{{ v.music_name }}</h4>
-                    {#                    </a>#}
-                </div>
-                <div class="media-body" style="margin-left: auto">
-                    <h5 class="media-heading">{{ v.author }}<a href="{{ url_for('home.play',id=v.music_id) }}"
-                                                               class="label label-primary pull-right"><span
-                            class="glyphicon glyphicon-play"></span>&nbsp;播放音乐</a></h5>
-                    <h5 class="media-heading">播放次数：{{ v.listen }}<a href="{{ url_for('home.like',id=v.music_id) }}"
-                                                                    class="label label-primary pull-right"><span
-                            class="glyphicon glyphicon-star"></span>&nbsp;收藏音乐</a></h5>
-                    <h5 class="media-heading">歌曲风格：{{ v.style }}
-                        {% if v.free == 0 %}
-                            <a href="{{ url_for('home.buy',id=v.music_id) }}"
-                               class="label label-primary pull-right"><span
-                                    class="glyphicon glyphicon-shopping-cart"></span>&nbsp;购买音乐</a></h5>
-                        {% endif %}
-                    </h5>
-
-                </div>
-            </div>
+    <table class="table table-hover" id="search-result">
+        <thead>
+        <tr>
+            <th scope="col">序号</th>
+            <th scope="col">歌曲</th>
+            <th scope="col">歌手</th>
+            <th scope="col">专辑</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for song in page_data %}
+            <tr id="{{ loop.index }}">
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ song.music_name }}</td>
+                <td>{{ song.author }}</td>
+                <td>{{ song.album }}</td>
+            </tr>
         {% endfor %}
-    </div>
-    </div>
+        </tbody>
+    </table>
+    <script>
+        $(document).ready(function () {
+            if (typeof ap === 'undefined') {
+                const ap = new APlayer({
+                    container: document.getElementById('aplayer'),
+                    fixed: true,
+                    listFolded: true,
+                    lrcType: 1
+                });
+
+                let data = {{ music_list | safe }};
+                let music = data["result"];
+                for (let i = 0; i < music.length; i++) {
+                    let musicItem = music[i];
+                    ap.list.add({
+                            name: musicItem["name"],
+                            url: "/queryurl/" + musicItem["id"],
+                            artist: musicItem["ar"],
+                            cover: musicItem["alPic"] + "?param=130y130",
+                            lrc: musicItem["lrc"]
+                        }
+                    );
+                }
+                $("tr").click(function () {
+                    let id = parseInt(this.id);
+                    ap.list.switch(id-1);
+                    ap.play();
+                });
+            }
+        });
+    </script>
 {% endblock %}

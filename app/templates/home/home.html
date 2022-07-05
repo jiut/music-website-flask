@@ -8,7 +8,6 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
-    <link rel="shortcut icon" href="{{ url_for('static',filename='base/images/logo.png') }}">
     <title>微音乐</title>
 
     <link rel="stylesheet" href="{{ url_for('static',filename='base/css/animate.css') }}">
@@ -44,7 +43,14 @@
 <!--导航-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #FFF !important;">
     <div class="container" style="height: 100%; width:91%;">
-        <a class="navbar-brand" href="{{ url_for('home.welcome') }}"
+
+        <a class="navbar-brand" href="
+{% if name %}
+{{ url_for('home.welcome') }}
+{% else %}
+{{ url_for('home.index') }}
+{% endif %}
+"
            style="margin-right: 46px; margin-top: .5rem; margin-bottom: .5rem;">
             <img src="{{ url_for("static", filename="static/image/logo拷贝.png") }}" alt="微音乐"
                  style="height: 50px; margin-top: -11px;"></a>
@@ -61,8 +67,27 @@
                                                     alt="搜索" style="width: 15px;"></span>
             </div>
             <ul class="navbar-nav" style="height: 100%;">
+                {% if name %}
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ url_for('home.pop') }}"><span
+                    <a class="nav-link" href="{{ url_for('home.pop') }}"><span
+                            style="display: inline-block;margin-top: auto;padding: 24px 0;"><span
+                            class="glyphicon glyphicon-headphones"></span> 音乐库
+                                <span class="visually-hidden">(current)</span></span>
+                    </a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('home.user') }}"><span
+                        style="display: inline-block;margin-top: auto;padding: 24px 0;"><span
+                        class="glyphicon glyphicon-user"></span>&nbsp;ID:
+                            {% block username %}
+                            {% endblock %}</span></a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('home.out') }}"><span
+                        style="display: inline-block; margin-top: auto;padding: 24px 0">
+                                <span class="glyphicon glyphicon-log-out"></span>&nbsp;退出</span></a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('home.pop') }}"><span
                             style="display: inline-block;margin-top: auto;padding: 24px 0;"><span
                             class="glyphicon glyphicon-headphones"></span> 音乐库
                                 <span class="visually-hidden">(current)</span></span>
@@ -76,10 +101,7 @@
                         style="display: inline-block; margin-top: auto;padding: 24px 0">
                                 <span class="glyphicon glyphicon-plus"></span>&nbsp;注册</span></a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('home.login') }}"><span
-                        style="display: inline-block; margin-top: auto;padding: 24px 0">
-                                <span class="glyphicon glyphicon-cog"></span>&nbsp;个人中心</span></a>
-                </li>
+                {% endif %}
             </ul>
         </div>
     </div>
@@ -87,17 +109,20 @@
 <!--导航-->
 <!--内容-->
 {#按钮#}
-<div class="container" style="background-color: #FFF; width: 80%;     margin-bottom: 70px;">
-<div class="button-list" style="display: flex; justify-content: space-evenly;">
-        <button type="button" class="btn btn-outline-info">推荐</button>
-        <button type="button" class="btn btn-outline-info">Pop榜</button>
-        <button type="button" class="btn btn-outline-info">Jazz榜</button>
-        <button type="button" class="btn btn-outline-info">R&B榜</button>
-        <button type="button" class="btn btn-outline-info">Classical榜</button>
-        <button type="button" class="btn btn-outline-info">Folk榜</button>
-        <button type="button" class="btn btn-outline-info">我喜欢的音乐</button>
-        <button type="button" class="btn btn-outline-info">已购买</button>
-    </div>
+<div class="container" style="background-color: #FFF; width: 80%; padding-bottom: 70px;">
+{#<div class="button-list" style="display: flex; justify-content: space-evenly;">#}
+{#        <button type="button" class="btn btn-outline-info">推荐</button>#}
+{#        <button type="button" class="btn btn-outline-info">Pop榜</button>#}
+{#        <button type="button" class="btn btn-outline-info">Jazz榜</button>#}
+{#        <button type="button" class="btn btn-outline-info">R&B榜</button>#}
+{#        <button type="button" class="btn btn-outline-info">Classical榜</button>#}
+{#        <button type="button" class="btn btn-outline-info">Folk榜</button>#}
+{#    {% if name %}#}
+{#        <button type="button" class="btn btn-outline-info">我喜欢的音乐</button>#}
+{#        <button type="button" class="btn btn-outline-info">已购买</button>#}
+{#    {% endif %}#}
+{#</div>#}
+
     {% block content %}{% endblock %}
 </div>
 <!--内容-->
