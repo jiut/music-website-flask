@@ -16,19 +16,20 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='base/css/minty.bootstrap.min.css') }}" id="target-css"
           class="basic">
     <link rel="stylesheet" href="{{ url_for('static',filename='base/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='base/css/unique.css') }}">
 
     {#
     <link rel="stylesheet" href="{{ url_for('static',filename='base/css/bootstrap-movie.css') }}">#}
 
 
-    <script src="{{ url_for('static',filename='base/js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='base/js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ url_for('static',filename='base/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ url_for('static',filename='base/js/jquery.singlePageNav.min.js') }}"></script>
     <script src="{{ url_for('static',filename='base/js/wow.min.js') }}"></script>
     <script src="{{ url_for('static',filename='lazyload/jquery.lazyload.min.js') }}"></script>
     <script src="{{ url_for('static',filename='aplayer/dist/APlayer.min.js') }}"></script>
 
-{#    <script src="{{ url_for('static',filename='base/js/color-thief.umd.js') }}"></script>#}
+    {#    <script src="{{ url_for('static',filename='base/js/color-thief.umd.js') }}"></script>#}
     <script src="{{ url_for('static',filename='base/js/custom.js') }}"></script>
 
     <link rel="icon" href="{{ url_for('static', filename='static/image/document.ico') }}">
@@ -39,9 +40,10 @@
 
 <div id="aplayer"></div>
 
-<script src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+{#<script src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>#}
 <!--导航-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #FFF !important;">
+<nav id="top-nav" class="navbar navbar-expand-lg navbar-light bg-light collapse show"
+     style="background-color: #FFF !important;">
     <div class="container" style="height: 100%; width:91%;">
 
         <a class="navbar-brand" href="
@@ -61,46 +63,47 @@
 
         <div class="collapse navbar-collapse" id="navbarColor01" style="height: 100%;">
             <div class="input-group" style="width: 362px; margin-right: auto;">
-                <input id="music-keyword" type="text" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="搜索音乐">
+                <input id="music-keyword" type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
+                       placeholder="搜索音乐">
                 <span class="input-group-text" id="search-button">
                     <img src="{{ url_for("static", filename="static/image/搜索符号.png") }}"
-                                                    alt="搜索" style="width: 15px;"></span>
+                         alt="搜索" style="width: 15px;"></span>
             </div>
             <ul class="navbar-nav" style="height: 100%;">
                 {% if name %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('home.pop') }}"><span
-                            style="display: inline-block;margin-top: auto;padding: 24px 0;"><span
-                            class="glyphicon glyphicon-headphones"></span> 音乐库
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home.pop') }}"><span
+                                style="display: inline-block;margin-top: auto;padding: 24px 0;"><span
+                                class="glyphicon glyphicon-headphones"></span> 音乐库
                                 <span class="visually-hidden">(current)</span></span>
-                    </a>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('home.user') }}"><span
-                        style="display: inline-block;margin-top: auto;padding: 24px 0;"><span
-                        class="glyphicon glyphicon-user"></span>&nbsp;ID:
-                            {% block username %}
-                            {% endblock %}</span></a>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('home.out') }}"><span
-                        style="display: inline-block; margin-top: auto;padding: 24px 0">
+                        </a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home.user') }}"><span
+                            style="display: inline-block;margin-top: auto;padding: 24px 0;"><span
+                            class="glyphicon glyphicon-user"></span>&nbsp;ID:
+                        {% block username %}
+                        {% endblock %}</span></a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home.out') }}"><span
+                            style="display: inline-block; margin-top: auto;padding: 24px 0">
                                 <span class="glyphicon glyphicon-log-out"></span>&nbsp;退出</span></a>
-                </li>
+                    </li>
                 {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('home.pop') }}"><span
-                            style="display: inline-block;margin-top: auto;padding: 24px 0;"><span
-                            class="glyphicon glyphicon-headphones"></span> 音乐库
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home.pop') }}"><span
+                                style="display: inline-block;margin-top: auto;padding: 24px 0;"><span
+                                class="glyphicon glyphicon-headphones"></span> 音乐库
                                 <span class="visually-hidden">(current)</span></span>
-                    </a>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('home.login') }}"><span
-                        style="display: inline-block;margin-top: auto;padding: 24px 0;"><span
-                        class="glyphicon glyphicon-log-in"></span>&nbsp;登录</span></a>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('home.register') }}"><span
-                        style="display: inline-block; margin-top: auto;padding: 24px 0">
+                        </a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home.login') }}"><span
+                            style="display: inline-block;margin-top: auto;padding: 24px 0;"><span
+                            class="glyphicon glyphicon-log-in"></span>&nbsp;登录</span></a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home.register') }}"><span
+                            style="display: inline-block; margin-top: auto;padding: 24px 0">
                                 <span class="glyphicon glyphicon-plus"></span>&nbsp;注册</span></a>
-                </li>
+                    </li>
                 {% endif %}
             </ul>
         </div>
@@ -109,26 +112,27 @@
 <!--导航-->
 <!--内容-->
 {#按钮#}
-<div class="container" style="background-color: #FFF; width: 80%; padding-bottom: 70px;">
-{#<div class="button-list" style="display: flex; justify-content: space-evenly;">#}
-{#        <button type="button" class="btn btn-outline-info">推荐</button>#}
-{#        <button type="button" class="btn btn-outline-info">Pop榜</button>#}
-{#        <button type="button" class="btn btn-outline-info">Jazz榜</button>#}
-{#        <button type="button" class="btn btn-outline-info">R&B榜</button>#}
-{#        <button type="button" class="btn btn-outline-info">Classical榜</button>#}
-{#        <button type="button" class="btn btn-outline-info">Folk榜</button>#}
-{#    {% if name %}#}
-{#        <button type="button" class="btn btn-outline-info">我喜欢的音乐</button>#}
-{#        <button type="button" class="btn btn-outline-info">已购买</button>#}
-{#    {% endif %}#}
-{#</div>#}
+<div id="main-container" class="container collapse show"
+     style="background-color: #FFF; width: 80%; padding-bottom: 70px;">
+    {#<div class="button-list" style="display: flex; justify-content: space-evenly;">#}
+    {#        <button type="button" class="btn btn-outline-info">推荐</button>#}
+    {#        <button type="button" class="btn btn-outline-info">Pop榜</button>#}
+    {#        <button type="button" class="btn btn-outline-info">Jazz榜</button>#}
+    {#        <button type="button" class="btn btn-outline-info">R&B榜</button>#}
+    {#        <button type="button" class="btn btn-outline-info">Classical榜</button>#}
+    {#        <button type="button" class="btn btn-outline-info">Folk榜</button>#}
+    {#    {% if name %}#}
+    {#        <button type="button" class="btn btn-outline-info">我喜欢的音乐</button>#}
+    {#        <button type="button" class="btn btn-outline-info">已购买</button>#}
+    {#    {% endif %}#}
+    {#</div>#}
 
     {% block content %}{% endblock %}
 </div>
 <!--内容-->
 <!--底部-->
 <footer>
-    <div class="container fixed-bottom" id="lyric-footer">
+    <div class="container fixed-bottom" id="lyric-footer" style="background: linear-gradient(transparent, white);">
         <div class="row">
             <div class="col-md-12" style="text-align: center;height: 82px;">
                 <hr>
@@ -137,7 +141,7 @@
     </div>
 </footer>
 <!--底部-->
-<script src="//cdn.bootcss.com/holder/2.9.4/holder.min.js"></script>
+{#<script src="//cdn.bootcss.com/holder/2.9.4/holder.min.js"></script>#}
 
 <script>
     $(function () {
@@ -154,12 +158,115 @@
 
         $("#search-button").click(function () {
             let keyword = $("#music-keyword").val();
-            window.open("{{ url_for("home.search") }}" + '?key=' + keyword,'_self');
+            window.open("{{ url_for("home.search") }}" + '?key=' + keyword, '_self');
         });
 
         $("#do_search").keydown(function () {
             $("#do_search").click();
         });
+    });
+</script>
+
+<img id="unique-img" src="http://p3.music.126.net/hwxZS2Bv9Dht_8chjLLR-Q==/109951165690591384.jpg?param=150y150" alt=""
+     style="
+    position: fixed;
+    margin: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    height: 150px;
+    width: 150px;
+    /*background-color: #704444;*/
+    /*opacity: 40%;*/
+    border-radius: 100%;
+    z-index: -5;
+">
+<div id="unique-bg" class="unique-bg-bright" style="position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: -10;">
+    <div id="visualizer" class="unique-before" style=""></div>
+</div>
+
+<div id="unique-toggleButton" style="
+    background-color: #1e1818;
+    z-index: 10000;
+
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+
+    height: 66px;
+    width: 84px;
+    line-height: 66px;
+"><span class="glyphicon glyphicon-chevron-up" style="color: grey"></span></div>
+
+{#<script src="{{ url_for("static",  filename="base/js/app.js") }}"></script>#}
+<script src="{{ url_for("static",  filename="base/js/sdk.js") }}"></script>
+<script>
+    $(document).ready(function () {
+        let unique_flag = false;
+
+        function debounce(fn, delay) {
+            let timer = null //借助闭包
+            return function () {
+                if (timer) {
+                    clearTimeout(timer)
+                }
+                timer = setTimeout(fn, delay) // 简化写法
+            }
+        }
+
+        function uniqueButton() {
+            if ($("canvas").length) {
+                let top_nav = $("#top-nav");
+                let main_container = $("#main-container");
+                top_nav.collapse("toggle");
+                main_container.collapse("toggle");
+
+                let unique_bg = $("#unique-bg");
+                let visuializer = $("#visualizer");
+                let canvas = $("#visualizer canvas");
+
+                if (unique_flag) {
+                    unique_bg.removeClass("unique-bg-dark").addClass("unique-bg-bright");
+
+                    visuializer.removeClass("unique-after").addClass("unique-before");
+
+                    canvas[0].classList.remove("canvas-after")
+                    canvas[0].classList.add("canvas-before");
+
+                    canvas[2].classList.remove("canvas-after")
+                    canvas[2].classList.add("canvas-before");
+
+                    $(".aplayer-lrc").css("color", "#666");
+
+                    $("#lyric-footer").css("background", "linear-gradient(transparent, white)");
+
+                    unique_flag = false;
+                } else {
+                    unique_bg.removeClass("unique-bg-bright").addClass("unique-bg-dark");
+
+                    visuializer.removeClass("unique-before").addClass("unique-after");
+
+                    canvas[0].classList.remove("canvas-before");
+                    canvas[0].classList.add("canvas-after");
+
+                    canvas[2].classList.remove("canvas-before");
+                    canvas[2].classList.add("canvas-after");
+
+                    $(".aplayer-lrc").css("color", "#b6b2b2");
+
+                    $("#lyric-footer").css("background", "none");
+
+                    unique_flag = true;
+                }
+            }
+        }
+
+        $("#unique-toggleButton").click(debounce(uniqueButton,200));
     });
 </script>
 </body>

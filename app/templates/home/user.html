@@ -3,6 +3,11 @@
     {{ name }}
 {% endblock %}
 {% block content %}
+    <style>
+    #unique-toggleButton{
+            display: none;
+        }
+    </style>
     <!--内容-->
     {% include "home/menu.html" %}
     <div class="col-md-9">
@@ -88,17 +93,5 @@
         $(document).ready(function () {
             $("#m1").addClass("active");
         })
-    </script>
-    <script>
-        $(document).ready(function () {
-            if (typeof ap === 'undefined') {
-                const ap = new APlayer({
-                    container: document.getElementById('aplayer'),
-                    fixed: true,
-                    listFolded: true,
-                    lrcType: 1
-                });
-            }
-        });
     </script>
 {% endblock %}

@@ -3,6 +3,10 @@
 {% block content %}
     <!--内容-->
     <style>
+        #unique-toggleButton{
+            display: none;
+        }
+
         .btn {
             width: 100%;
             height: 50px;
@@ -115,16 +119,4 @@
         </div>
     </div>
     <!--内容-->
-<script>
-        $(document).ready(function () {
-            if (typeof ap === 'undefined') {
-                const ap = new APlayer({
-                    container: document.getElementById('aplayer'),
-                    fixed: true,
-                    listFolded: true,
-                    lrcType: 1
-                });
-            }
-        });
-    </script>
 {% endblock %}

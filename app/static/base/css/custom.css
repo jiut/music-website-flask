@@ -1,3 +1,11 @@
+.glyphicon-chevron-up:before {
+    content: "\e113";
+}
+
+.glyphicon-play:before {
+    content: "\e072";
+}
+
 .glyphicon-equalizer:before {
     content: "\e210";
 }
@@ -210,10 +218,6 @@ h1 {
     margin-bottom: 30px;
 }
 
-#lyric-footer {
-    background: linear-gradient(transparent, white);
-}
-
 .table tbody tr td, th {
     vertical-align: middle;
 }
@@ -239,6 +243,10 @@ h1 {
 
 p.aplayer-lrc-current {
     font-size: initial !important;
+}
+
+.aplayer-lrc{
+    text-shadow: none !important;
 }
 
 .navbar-brand > img {

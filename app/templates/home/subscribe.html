@@ -9,6 +9,9 @@
         h5 {
             font-size: initial;
         }
+        #unique-toggleButton{
+            display: none;
+        }
     </style>
     <div class="col-md-9">
         {% for msg in get_flashed_messages(category_filter=["err"]) %}
@@ -109,17 +112,5 @@
         $(document).ready(function () {
             $("#m3").addClass("active");
         })
-    </script>
-    <script>
-        $(document).ready(function () {
-            if (typeof ap === 'undefined') {
-                const ap = new APlayer({
-                    container: document.getElementById('aplayer'),
-                    fixed: true,
-                    listFolded: true,
-                    lrcType: 1
-                });
-            }
-        });
     </script>
 {% endblock %}

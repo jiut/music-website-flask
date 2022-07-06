@@ -1,0 +1,47 @@
+#unique-canvas-1{
+    transition: all 1.3s cubic-bezier(0.55, 0.06, 0.68, 0.19);
+}
+
+#lyric-footer{
+    transition: background 0.5s ease-out;
+}
+
+#unique-bg{
+    transition: background-color 0.5s ease-out;
+}
+
+.unique-bg-bright{
+    background-color: #FFF;
+}
+
+.unique-bg-dark{
+    background-color: #161515;
+}
+
+#visualizer.unique-before{
+    transform: scale(1.4);
+    opacity: 13%;
+    filter: invert(99%);
+}
+
+#visualizer.unique-after{
+    transform: scale(1);
+    opacity: 43%;
+    filter: invert(0);
+}
+
+#unique-canvas-1.canvas-before{
+    transform: scale(1);
+}
+
+#unique-canvas-1.canvas-after{
+    transform: scale(0.5);
+}
+
+#unique-canvas-2.canvas-before{
+    filter: saturate(1) brightness(1) grayscale(0);
+}
+
+#unique-canvas-2.canvas-after{
+    filter: saturate(1) brightness(3.3) grayscale(0.8);
+}
