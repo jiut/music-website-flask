@@ -1,0 +1,344 @@
+.glyphicon-chevron-up:before {
+    content: "\e113";
+}
+
+.glyphicon-play:before {
+    content: "\e072";
+}
+
+.glyphicon-equalizer:before {
+    content: "\e210";
+}
+
+.glyphicon-piggy-bank:before {
+    content: "\e225";
+}
+
+.glyphicon-cd:before {
+    content: "\e201";
+}
+
+.glyphicon-calendar:before {
+    content: "\e109";
+}
+
+.glyphicon-tag:before {
+    content: "\e041";
+}
+
+.table-hover thead {
+    white-space: nowrap;
+}
+
+.tab-pane .card{
+    cursor: pointer;
+}
+
+.row{
+    justify-content: center;
+    align-content: center;
+}
+
+.glyphicon-phone:before {
+    content: "\e145";
+}
+
+.glyphicon-envelope:before {
+    content: "\2709";
+}
+
+.glyphicon-lock:before {
+    content: "\e033";
+}
+
+.glyphicon-log-out:before {
+    content: "\e163";
+}
+
+.glyphicon-user:before {
+    content: "\e008";
+}
+
+.pic_num{
+    margin-top: 6px;
+    font-size: 12px;
+    color: #999;
+}
+
+.pic_text{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pic_name.flex_c{
+    position: relative;
+    height: 22px;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 400;
+    margin-top: 17px;
+    flex-wrap: nowrap;
+    justify-content: center;
+    padding: 0 5px;
+}
+
+.pic{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.pic_out{
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    overflow: hidden;
+    border-radius: 50%;
+    font-size: 0;
+}
+
+.pic_artist{
+    text-align: center;
+}
+
+.artist_item{
+    width: 13%;
+}
+
+.lower{
+    margin-top: 23px;
+}
+
+.index {
+    padding-top: 3px;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+}
+
+.top-list-item{
+    display: flex;
+    justify-content: space-between;
+}
+
+.top1{
+    background: url("/static/base/images/icon_first.png") center 4px no-repeat
+}
+
+.top2{
+    background: url("/static/base/images/icon_second.png") center 4px no-repeat
+}
+
+.top3{
+    background: url("/static/base/images/icon_third.png") center 4px no-repeat
+}
+
+.top-img{
+    background-size: 168%;
+    width: 20px;
+    height: 30px;
+}
+
+.info{
+        width: 85%;
+    padding-left: 10px;
+}
+.song-name{
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    font-weight: 400;
+    height: 22px;
+    line-height: 22px;
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.top-list-artist{
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 4px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #999;
+    height: 20px;
+    line-height: 20px;
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.top-list{
+    box-shadow: 0 0 30px 0 rgb(65 67 70 / 8%);
+}
+
+.top-list-top {
+    box-sizing: border-box;
+    position: relative;
+    padding-bottom: 54.8%;
+    overflow: hidden;
+}
+
+.top-list-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(46, 32, 60, .7);
+    z-index: 10;
+}
+
+.top-list-bg-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 54.3%;
+    z-index: 10;
+}
+
+.top-list-top .card-img-top {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+h1 {
+    margin-top: 80px;
+    margin-bottom: 30px;
+}
+
+.table tbody tr td, th {
+    vertical-align: middle;
+}
+
+#search-button {
+    cursor: pointer;
+}
+
+.tab-pane {
+    margin-top: 56px;
+}
+
+.card {
+    width: 17.85%;
+    border-radius: 0;
+    border: 0;
+    margin: 0 38px;
+}
+
+.card-img-top {
+    border-radius: 0;
+}
+
+p.aplayer-lrc-current {
+    font-size: initial !important;
+}
+
+.aplayer-lrc{
+    text-shadow: none !important;
+}
+
+.navbar-brand > img {
+    display: inline;
+}
+
+.media {
+    padding: 3px;
+    border: 1px solid #ccc
+}
+
+.glyphicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings' !important;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.glyphicon-headphones:before {
+    content: "\e035";
+}
+
+.glyphicon-log-in:before {
+    content: "\e161";
+}
+
+.glyphicon-plus:before {
+    content: "\2b";
+}
+
+.glyphicon-cog:before {
+    content: "\e019";
+}
+
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url(../fonts/glyphicons-halflings-regular.eot);
+    src: url(../fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'), url(../fonts/glyphicons-halflings-regular.woff2) format('woff2'), url(../fonts/glyphicons-halflings-regular.woff) format('woff'), url(../fonts/glyphicons-halflings-regular.ttf) format('truetype'), url(../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg')
+}
+
+.nav-link.active {
+    --bs-bg-opacity: 1;
+    background-color: #6be88f !important;
+    color: #FFF !important;
+}
+
+.navbar {
+    padding: 0 !important;
+    height: 108px;
+    padding: 0 100px !important;
+}
+
+.nav-link {
+    padding: 1rem .5rem;
+    height: 100%;
+    padding: 1rem 1.2rem !important;
+    font-size: 1.2rem;
+    border-radius: 0 !important;
+}
+
+.nav-item {
+    height: 100%;
+}
+
+.input-group-text {
+    border-top-right-radius: 1.3rem;
+    border-bottom-right-radius: 1.3rem;
+}
+
+.form-control {
+    border-top-left-radius: 1.3rem;
+    border-bottom-left-radius: 1.3rem;
+}
+
+#aplayer {
+    z-index: 9999;
+}
+
+* {
+    font-family: "Source Han Sans SC VF Normal" !important;
+}
+
+.button-list {
+    font-size: 18px;
+}
+
+button.btn.btn-outline-info {
+    border-radius: 1.5rem;
+    margin: 10px 5px;
+}

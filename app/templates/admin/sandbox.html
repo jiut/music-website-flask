@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head style="height: 100%;">
+    <title>草木有灵</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/page3.css">
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <title>植物意向情感对应</title>
+    <style>
+        /* 字体配置 */
+        @font-face {
+            font-family: 'myfont1';
+            src: url('./font/FZShenYMXSJW.TTF');
+        }
+
+        @font-face {
+            font-family: 'myfont2';
+            src: url('./font/FZQinKeBYSJT.TTF');
+        }
+    </style>
+</head>
+<!-- <img src="./img/bg2.jpg"> -->
+
+
+<body style="flex-direction: row; ">
+    <img src="./img/bg2.jpg" alt="" style="position: fixed; width: 100%; height: 100%; z-index: -5;">
+    <div class="btn-group" role="group" aria-label="Basic example" style = "display:flex;margin-left:865px;margin-bottom:-200px;margin-top:0px;">
+        <button class="new_btn" style="font-size: 18px;" onclick="javascrtpt:window.location.href='index.html'">
+            <img src="./img/1-1.png">
+        </button>
+        <button class="new_btn" disabled   onclick="javascrtpt:window.location.href='1.html'">
+            <img src="./img/2-1.png" />
+        </button>
+        <button class="new_btn" onclick="javascrtpt:window.location.href='2.html'">
+            <img    src="./img/3-1.png" />
+        </button>
+        <button class="new_btn"  onclick="javascrtpt:window.location.href='3.html'">
+            <img src="./img/4-1.png" />
+        </button>
+    </div>
+    <div id='main' style = "">
+        <!--         <div class="nav-btn btn-group" role="group" aria-label="Basic example">
+            <button class="btn btn-outline-info" style="font-size: 18px;" onclick="javascrtpt:window.location.href='index.html'">
+                 <img src="./img/btn.png">
+                主页
+            </button>
+            <button class="btn btn-outline-info"  onclick="javascrtpt:window.location.href='1.html'">
+                <img src="./img/菊花.png" />
+            </button>
+            <button class="btn btn-outline-info"   onclick="javascrtpt:window.location.href='2.html'">
+                <img src="./img/植物1.png" />
+            </button>
+            <button class="btn btn-outline-info" disabled onclick="javascrtpt:window.location.href='3.html'">
+                <img src="./img/树1.png" />
+            </button>
+        </div> -->
+
+        
+
+        <div class='title3'>
+            <p>植物意象与情感对应</p>
+        </div>
+        <div class='main3' id = 'chart'></div>
+        <script src = "js/bars.js"></script>
+    </div>
+
+</body>
+
+</html>

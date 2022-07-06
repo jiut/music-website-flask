@@ -1,0 +1,111 @@
+{% extends "admin/home.html" %}
+{% block name %}
+    管理员： {{ id }}
+{% endblock %}
+
+{% block content %}
+    {% include "admin/menu.html" %}
+    <link rel="stylesheet" type="text/css" href="/static/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/slick-theme.css">
+{#    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">#}
+    <link rel="stylesheet" type="text/css" href="/static/css/page2.css">
+    <style>
+        /* 字体配置 */
+        @font-face {
+            font-family: 'myfont1';
+            src: url('/static/font/FZShenYMXSJW.TTF');
+        }
+
+        @font-face {
+            font-family: 'myfont2';
+            src: url('/static/font/FZQinKeBYSJT.TTF');
+        }
+    </style>
+    <div class="page2">
+        <div style="display: flex; flex-direction: column; width: 1200px; height: 100%; margin: 0 auto;">
+
+            <div class="main" style="display: flex; flex-direction: row;padding-top:50px;">
+                <div id="sun-map" style="display: flex; flex-direction: column; margin-top: -20px;">
+                    <div id="sun" style="width:600px; height: 600px;">
+                    </div>
+                    <div class="map-title"
+                        style="height: 20px; text-align: center; margin-top: 5px; font-family: 'myfont2'; font-size: 20px;">
+                        曲库中出现频次最高的前20种流派
+                    </div>
+                </div>
+                <div id="txt-div"
+                    style="width: 600px; height: 600px; text-align: left;margin-top:-10px;margin-left: 120px;font-size: medium;">
+                    <span id='all_num'>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        作品分析曲库数据<br />共计近<strong>5万</strong>余首歌曲，<br />
+                        诗中涉及音乐流派共<strong>110</strong>种<br />
+                        其中出现次数最多流派为<strong>嘻哈</strong><br />
+                        出现次数排名前10的其他流派有：<br />美声、热门、民族、说唱、流行、电子、新世纪、日韩、传统、古典<br />
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="info" style="display: none;width:1000px; height: 700px;margin:70px auto">
+                <div style="display: flex; flex-direction: column;">
+
+                    <!-- flex-direction: row; -->
+                    <div style="display: flex;flex-direction: column;">
+                        <div id="info-div" style="margin-top: 60px; margin-left: 60px;">
+
+                        </div>
+                        <div id="map" style="width: 1000px; height: 500px; margin-left: 50px; margin-top: -60px;">
+
+                        </div>
+                    </div>
+
+                    <div class="return"
+                        style="height:30px; width: 30px; margin-left: 944px;margin-top:-55px;position: relative;">
+                        <!-- <button type="button" class="close btn btn-light" aria-label="关闭" style="margin-top: 10px;" onclick="hide()">
+                            <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true">&larr;</span>
+                        </button> -->
+                        <button style="background:none;border: none;outline: none;" onclick="hide()"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                                class="bi bi-reply" viewBox="0 0 16 16">
+                                <path
+                                    d="M6.598 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.74 8.74 0 0 0-1.921-.306 7.404 7.404 0 0 0-.798.008h-.013l-.005.001h-.001L7.3 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L2.614 8.254a.503.503 0 0 0-.042-.028.147.147 0 0 1 0-.252.499.499 0 0 0 .042-.028l3.984-2.933zM7.8 10.386c.068 0 .143.003.223.006.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96v-.667z" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+<script src="/static/js/dataset.js"></script>
+<script src="/static/js/data2.js"></script>
+<script src="/static/js/vue.js"></script>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/slick.js"></script>
+<script src="/static/js/echarts.js"></script>
+<script src="/static/js/echarts-wordcloud.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        drawSun();
+    });
+</script>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function () {
+            $("#m5").addClass("active");
+        })
+    </script>
+{% endblock %}

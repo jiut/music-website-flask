@@ -1,0 +1,341 @@
+{% extends "admin/home.html" %}
+{% block name %}
+    管理员： {{ id }}
+{% endblock %}
+
+{% block content %}
+
+    {% include "admin/menu.html" %}
+                <div id="main">
+                        <button id="btn8" class="btn plant-btn" type="button"  onclick="change(8)">
+                             <img class="btn-img" src="{{ url_for('static',filename='admin/analysis/img/竹.png')}}">
+                             流行
+                        </button>
+                        <button id="btn6" class="btn plant-btn" type="button"  onclick="change(6)">
+                            <img class="btn-img" src="{{ url_for('static',filename='admin/analysis/img/松.png')}}">
+                             民谣
+                        </button>
+                        <button id="btn4" class="btn plant-btn" type="button"  onclick="change(4)">
+                            <img class="btn-img" src="{{ url_for('static',filename='admin/analysis/img/柳.png')}}">
+                             爵士
+                        </button>
+                        <button id="btn3" class="btn plant-btn" type="button" onClick="change(3)">
+                            <img class="btn-img" src="{{ url_for('static',filename='admin/analysis/img/莲.png')}}">
+                             R&B
+                        </button>
+                        <button id="btn2" class="btn plant-btn" type="button" onClick="change(2)">
+                            <img class="btn-img" src="{{ url_for('static',filename='admin/analysis/img/兰.png')}}">
+                             古典
+                        </button>
+                    </div>
+
+
+                <div class="card-div">
+                    <div id="content1" class="need-hide1 show" style = "display: none;">
+                        <div id="player1">
+                            <div class="card-page1" style="display: flex; flex-direction: row; margin-left: 240px; margin-top: 59px;">
+                                <div class="img-div">
+                                    <img class="img"  src="{{ url_for('static',filename='admin/analysis/img/菊.png')}}">
+                                </div>
+                                <div class="info-div" id = 'info1'>
+
+                                </div>
+
+                            </div>
+                            <div class="card-page2">
+                                <div style="display: flex; flex-direction: column;">
+                                    <div class="wc-div" id="wc1"style="margin-left: 240px;">
+                                    </div>
+                                    <div class="map-title" style="height: 20px; text-align: center; margin-top: 0px; font-family: 'myfont2'; font-size: 20px; margin-left: 240px;">
+                                        偏爱菊的诗人
+                                    </div>
+                                </div>
+
+                                <!-- <div class="wc-div" id="wc1">
+                                </div> -->
+                                <div class="poet-div">
+                                    诗人对应的诗
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="content2" class="need-hide1 show" style="display: none;">
+                        <div id="player2">
+                            <div class="card-page1" style="display: flex; flex-direction: row; margin-left: 240px; margin-top: 59px;">
+                                <div class="img-div">
+                                    <img class="img"  src="{{ url_for('static',filename='admin/analysis/img/兰.png')}}">
+                                </div>
+                                <div class="info-div" id = 'infor2'>
+                                    <h2>我喜欢</h2>
+                                </div>
+                            </div>
+                            <div class="card-page2">
+                                <div style="display: flex; flex-direction: column;">
+                                    <div class="wc-div" id="wc2"style="margin-left: 240px;">
+                                    </div>
+                                    <div class="map-title" style="height: 80px; text-align: center; margin-top: 0px; font-family: 'myfont2'; font-size: 20px; margin-left: 240px;">
+                                        偏爱classical的歌手
+                                    </div>
+                                </div>
+
+                                <div class="poet-div">
+                                        歌手对应的歌曲
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="content3" class="need-hide1 show" style="display: none;">
+                        <div id="player3">
+                            <div class="card-page1" style="display: flex; flex-direction: row; margin-left: 240px; margin-top: 59px;">
+                                <div class="img-div">
+                                    <img class="img" src="{{ url_for('static',filename='admin/analysis/img/莲.png')}}">
+                                </div>
+                                <div class="info-div" id = 'infor3'>
+                                    <h2>我喜欢</h2>
+                                </div>
+                            </div>
+                            <div class="card-page2">
+                                <div style="display: flex; flex-direction: column;">
+                                    <div class="wc-div" id="wc3"style="margin-left: 240px;">
+                                    </div>
+                                    <div class="map-title" style="height: 80px; text-align: center; margin-top: 0px; font-family: 'myfont2'; font-size: 20px; margin-left: 240px;">
+                                        偏爱的R&B歌手
+                                    </div>
+                                </div>
+
+                                <div class="poet-div">
+                                      歌手对应的歌曲
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="content4" class="need-hide1 show" style="display: none;">
+                        <div id="player4">
+                            <div class="card-page1" style="display: flex; flex-direction: row; margin-left: 240px; margin-top: 59px;">
+                                <div class="img-div">
+                                    <img class="img" src="{{ url_for('static',filename='admin/analysis/img/柳.png')}}">
+                                </div>
+                                <div class="info-div" id = 'infor4'>
+                                    <h2>我喜欢</h2>
+                                </div>
+                            </div>
+                            <div class="card-page2">
+                                <div style="display: flex; flex-direction: column;">
+                                    <div class="wc-div" id="wc4"style="margin-left: 240px;">
+                                    </div>
+                                    <div class="map-title" style="height: 80px; text-align: center; margin-top: 0px; font-family: 'myfont2'; font-size: 20px; margin-left: 240px;">
+                                        偏爱的jazz歌手
+                                    </div>
+                                </div>
+                                <div class="poet-div">
+                                       歌手对应的歌曲
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="content5" class="need-hide1 show" style="display: none;">
+                        <div id="player5">
+                            <div class="card-page1" style="display: flex; flex-direction: row; margin-left: 240px; margin-top: 59px;">
+                                <div class="img-div">
+                                    <img class="img" src="{{ url_for('static',filename='admin/analysis/img/梅.png')}}">
+                                </div>
+                                <div class="info-div" id = 'infor5'>
+                                    <h2>植物简介</h2>
+                                </div>
+                            </div>
+                            <div class="card-page2">
+                                <div style="display: flex; flex-direction: column;">
+                                    <div class="wc-div" id="wc5"style="margin-left: 240px;">
+                                    </div>
+                                    <div class="map-title" style="height: 20px; text-align: center; margin-top: 0px; font-family: 'myfont2'; font-size: 20px; margin-left: 240px;">
+                                        偏爱梅的诗人
+                                    </div>
+                                </div>
+                                <div class="poet-div">
+                                    诗人对应的诗
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="content6" class="need-hide1 show" style="display: none;">
+                        <div id="player6">
+                            <div class="card-page1" style="display: flex; flex-direction: row; margin-left: 240px; margin-top: 59px;">
+                                <div class="img-div">
+                                    <img class="img" src="{{ url_for('static',filename='admin/analysis/img/松.png')}}">
+                                </div>
+                                <div class="info-div" id = 'infor6'>
+                                    <h2>我喜欢</h2>
+                                </div>
+                            </div>
+                            <div class="card-page2">
+                                <div style="display: flex; flex-direction: column;">
+                                    <div class="wc-div" id="wc6"style="margin-left: 240px;">
+                                    </div>
+                                    <div class="map-title" style="height: 80px; text-align: center; margin-top: 0px; font-family: 'myfont2'; font-size: 20px; margin-left: 240px;">
+                                        偏爱的folk歌手
+                                    </div>
+                                </div>
+                                <div class="poet-div">
+                                    歌手对应的歌曲
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="content7" class="need-hide1 show" style="display:none;">
+                        <div id="player7">
+                            <div class="card-page1" style="display: flex; flex-direction: row; margin-left: 240px; margin-top: 59px;">
+                                <div class="img-div">
+                                </div>
+                                <div class="info-div" id = 'infor7'>
+                                    <h2>植物简介</h2>
+                                </div>
+                            </div>
+                            <div class="card-page2">
+                                <div style="display: flex; flex-direction: column;">
+                                    <div class="wc-div" id="wc7"style="margin-left: 200px;">
+                                    </div>
+                                    <div class="map-title" style="height: 20px; text-align: center; margin-top: 0px; font-family: 'myfont2'; font-size: 20px; margin-left: 240px;">
+                                        偏爱桃的诗人
+                                    </div>
+                                </div>
+                                <div class="poet-div">
+                                    诗人对应的诗
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="content8" class="need-hide1 show" sytle="display:none">
+                        <div id="player8">
+                            <div class="card-page1" style="display: flex; flex-direction: row; margin-left: 40px; margin-top: 59px;">
+                                <div class="img-div">
+                                    <img class="img" src="{{ url_for('static',filename='admin/analysis/img/竹.png')}}">
+                                </div>
+                                <div class="info-div" id = 'infor8'>
+                                    <h2>我喜欢</h2>
+                                </div>
+                            </div>
+                            <div class="card-page2">
+                                <div style="display: flex; flex-direction: column;">
+                                    <div class="wc-div" id="wc8" style="margin-left: 240px;">
+                                    </div>
+                                    <div class="map-title" style="height: 80px; text-align: center; margin-top: 0px; font-family: 'myfont2'; font-size: 20px; margin-left: 240px;">
+                                        偏爱的pop歌手
+                                    </div>
+                                </div>
+                                <div class="poet-div">
+                                    歌手对应的歌曲
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+{% endblock %}
+
+{% block js %}
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='admin/analysis/css/slick.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='admin/analysis/css/slick-theme.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='admin/analysis/css/1.css')}}">
+
+         <script src="{{ url_for('static',filename='admin/analysis/js/jquery.min.js')}}"></script>
+
+
+ <script src="{{ url_for('static',filename='admin/analysis/js/echarts.js') }}"></script>
+        <script src="{{ url_for('static',filename='admin/analysis/js/echarts-wordcloud.js') }}"></script>
+        <script src="{{ url_for('static',filename='admin/analysis/js/dataset.js') }}"></script>
+        <!-- <script src = "./js/eras_bar.js>"></script> -->
+    <script src="{{ url_for('static',filename='admin/analysis/js/data.js') }}"></script>
+    <script src="{{ url_for('static',filename='admin/analysis/js/vue.js') }}"></script>
+    <script src="{{ url_for('static',filename='admin/analysis/js/slick.js') }}"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#player1').slick({
+                    // autoplay: true,
+                    // autoplaySpeed:3000,
+                    pauseOnHover: true,  //鼠标悬停暂停自动播放
+                    dots: true,
+                    arrows:false,
+                    // slickPlay:true
+                });
+                $('#player2').slick({
+                    // autoplay: true,
+                    // autoplaySpeed:3000,
+                    pauseOnHover: true,  //鼠标悬停暂停自动播放
+                    dots: true,
+                    arrows:false,
+                    // slickPlay:true
+                });
+                $('#player3').slick({
+                    // autoplay: true,
+                    // autoplaySpeed:3000,
+                    pauseOnHover: true,  //鼠标悬停暂停自动播放
+                    dots: true,
+                    arrows:false,
+                    // slickPlay:true
+                });
+                $('#player4').slick({
+                    // autoplay: true,
+                    // autoplaySpeed:3000,
+                    pauseOnHover: true,  //鼠标悬停暂停自动播放
+                    dots: true,
+                    arrows:false,
+                    // slickPlay:true
+                });
+                $('#player5').slick({
+                    // autoplay: true,
+                    // autoplaySpeed:3000,
+                    pauseOnHover: true,  //鼠标悬停暂停自动播放
+                    dots: true,
+                    arrows:false,
+                    // slickPlay:true
+                });
+                $('#player6').slick({
+                    // autoplay: true,
+                    // autoplaySpeed:3000,
+                    pauseOnHover: true,  //鼠标悬停暂停自动播放
+                    dots: true,
+                    arrows:false,
+                    // slickPlay:true
+                });
+                $('#player7').slick({
+                    // autoplay: true,
+                    // autoplaySpeed:3000,
+                    pauseOnHover: true,  //鼠标悬停暂停自动播放
+                    dots: true,
+                    arrows:false,
+                    // slickPlay:true
+                });
+                $('#player8').slick({
+                    // autoplay: true,
+                    // autoplaySpeed:3000,
+                    pauseOnHover: true,  //鼠标悬停暂停自动播放
+                    dots: true,
+                    arrows:false,
+                    // slickPlay:true
+                });
+                change(8);
+                // $(".card-page1").css("display", "flex");
+                // $(".card-page2").css("display", "flex");
+                $("#slick-slide-control01").click(drawWC(1, 'wc1'));
+                $("#slick-slide-control11").click(drawWC(2, 'wc2'));
+                $("#slick-slide-control21").click(drawWC(3, 'wc3'));
+                $("#slick-slide-control31").click(drawWC(4, 'wc4'));
+                $("#slick-slide-control41").click(drawWC(5, 'wc5'));
+                $("#slick-slide-control51").click(drawWC(6, 'wc6'));
+                $("#slick-slide-control61").click(drawWC(7, 'wc7'));
+                $("#slick-slide-control71").click(drawWC(8, 'wc8'));
+            });
+        </script>
+     <script src="{{ url_for('static',filename='admin/analysis/js/bootstrap.min.js')}}"></script>
+
+
+{% endblock %}

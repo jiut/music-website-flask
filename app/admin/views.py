@@ -157,3 +157,15 @@ def manage():
     authors = Author.query.all()
     musics = Music.query.all()
     return render_template('admin/index.html', author=authors, music=musics, form=author_form)
+
+@admin.route('/data1/')
+def data1():
+    return render_template('admin/data1.html')
+
+@admin.route('/d2/')
+def d2():
+    return render_template('admin/d2.html')
+
+@admin.route('/d3/')
+def d3():
+    return render_template('admin/d3.html')

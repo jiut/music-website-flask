@@ -1,0 +1,49 @@
+* {
+  /* width: 1200px;
+    height: 800px; */
+}
+body {
+  /*     display: flex; */
+  position: relative;
+}
+#main {
+  
+}
+#main .nav {
+  width: 400px;
+  height: 50px;
+  background-color: red;
+  position: absolute;
+  right: 0px;
+}
+#main .title3 {
+  width: 800px;
+  height: 80px;
+  /* background-color: yellow; */
+  margin: 0 auto;
+  text-align: center;
+  /* 调整文字位置 */
+}
+#main .title3 p {
+    text-align: center;
+    font-size: medium;
+    font-family: myfont2;
+}
+#main .main3 {
+  width: 975px;
+  /* border: solid; */
+  height: 700px;
+  margin: 0 auto;
+}
+.new_btn {
+  background: none;
+  border: none;
+  outline: none;
+  width: 120px;
+  padding-left: 80px;
+  padding-right: 60px;
+}
+.new_btn > img {
+  width: 150px;
+  margin-left: -50px;
+}

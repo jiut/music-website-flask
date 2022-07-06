@@ -1,0 +1,20 @@
+.button1, .button2, .button3{
+    border-radius: px;
+    height: 5px;
+    width: 5px;
+    background-color: black;
+}
+
+.btn-div{
+    height: 40px;
+    width: 150px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display:flex; 
+    flex-direction:row;
+}
+
+#page{
+    background-size: cover;
+    background-image: url('../img/bg1.jpg');
+}

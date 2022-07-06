@@ -1,0 +1,36 @@
+{% extends "admin/home.html" %}
+{% block name %}
+    管理员： {{ id }}
+{% endblock %}
+
+{% block content %}
+
+    {% include "admin/menu.html" %}
+<div class='title3' >
+            <h4 align="center">历史播放</h4>
+        </div>
+
+    <div id='main' style = "">
+
+        <div class='main3' id = 'chart'></div>
+
+    </div>
+{% endblock %}
+
+{% block js %}
+    <link rel="stylesheet" type="text/css" href="/static/css/page3.css">
+    <script type="text/javascript" src="/static/js/echarts.min.js"></script>
+
+    <script src = "/static/js/bars.js"></script>
+     <style>
+            /* 字体配置 */
+            @font-face {
+                font-family:'myfont1';
+                src: url('/static/font/FZShenYMXSJW.TTF');
+            }
+            @font-face {
+                font-family:'myfont2';
+                src: url('/static/font/FZQinKeBYSJT.TTF');
+            }
+        </style>
+{% endblock %}
